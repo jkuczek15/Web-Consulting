@@ -9,7 +9,7 @@ export class ChatService {
 
   getChatByRoom(room) {
     return new Promise((resolve, reject) => {
-      this.http.get('/chat/' + room)
+      this.http.get('/api/chat/' + room)
         .map(res => res.json())
         .subscribe(res => {
           resolve(res);
@@ -21,7 +21,7 @@ export class ChatService {
 
   saveChat(data) {
     return new Promise((resolve, reject) => {
-        this.http.post('/chat', data)
+        this.http.post('/api/chat', data)
           .map(res => res.json())
           .subscribe(res => {
             resolve(res);

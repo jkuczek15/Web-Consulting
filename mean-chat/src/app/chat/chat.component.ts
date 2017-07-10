@@ -11,7 +11,7 @@ export class ChatComponent implements OnInit, AfterViewChecked {
 
   @ViewChild('scrollMe') private myScrollContainer: ElementRef;
 
-  chats: any
+  chats: {};
   joinned: boolean = false;
   newUser = { nickname: '', room: '' };
   msgData = { room: '', nickname: '', message: '' };
@@ -30,6 +30,7 @@ export class ChatComponent implements OnInit, AfterViewChecked {
     this.socket.on('new-message', function (data) {
       var user = JSON.parse(localStorage.getItem("user"));
       if(user && data.message.room === user.room) {
+        console.log(data.message)
         this.chats.push(data.message);
         this.msgData = { room: user.room, nickname: user.nickname, message: '' }
         this.scrollToBottom();
