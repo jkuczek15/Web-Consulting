@@ -7,6 +7,7 @@ import { RouterModule, Routes } from '@angular/router';
 
 // Services
 import { ChatService } from './common/chat/chat.service';
+import { RegisterService } from './auth/register/register.service';
 
 // Main Application Components
 import { AppComponent } from './app.component';
@@ -74,7 +75,10 @@ appRoutes.push({
       // { enableTracing: true } // <-- debugging purposes only
     )
   ],
-  providers: [ChatService],
+  providers: [
+    ChatService, 
+    RegisterService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
