@@ -20,10 +20,11 @@ Run `ng build` to build the project. The build artifacts will be stored in the `
 
 ## Test Website + API
 
-1. Run `npm install` to install any missing dependencies.
+1. Navigate to project folder, run `npm install` to install any missing dependencies.
+2. Make sure you have [mongoDB](https://www.mongodb.com/download-center#community) installed and it is running on port 27017.
 2. Run `ng build` to build the project.
 3. Run `npm start` to run the project.
-4. Navigate  [http://localhost:3000/](http://localhost:3000/)
+4. Navigate  [http://localhost:3000/](http://localhost:3000/) in your browser.
 
 ## Running end-to-end tests
 

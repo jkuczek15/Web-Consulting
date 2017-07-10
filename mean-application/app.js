@@ -6,15 +6,17 @@ var bodyParser = require('body-parser');
 var mongoose = require('mongoose');
 mongoose.Promise = global.Promise;
 
+// Connect to mongoDB
 mongoose.connect('mongodb://localhost/mean-chat', {
     useMongoClient: true
-})
-  .then(() =>  console.log('connection successful'))
+}).then(() =>  console.log('connection successful'))
   .catch((err) => console.error(err));
 
-var chat = require('./routes/chat');
+// Initialize our API route for Chat
+var chat = require('./api/routes/chat');
 var app = express();
 
+// Initialize the node logger
 app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({'extended':'false'}));
