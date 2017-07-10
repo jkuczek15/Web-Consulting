@@ -1,0 +1,30 @@
+/* 
+   Global Style sheet, add any styles here that should be applied 
+   accross multiple components.                                 
+*/
+   
+/* Set height of the grid so .sidenav can be 100% (adjust as needed) */
+.row.content {
+    height: 39.857em; 
+    overflow: hidden;
+}
+
+/* On small screens, set height to 'auto' for sidenav and grid */
+@media screen and (max-width: 767px) {
+    .sidenav {
+        height: auto;
+        padding: 1.07em;
+    }
+    .row.content {height:auto;} 
+}
+
+/* Set gray background color and 100% height */
+.sidenav {
+    padding-top: 1.43em;
+    background-color: #f1f1f1;
+    height: 100%;
+}
+
+select:invalid { 
+    color: lightslategray; 
+}
