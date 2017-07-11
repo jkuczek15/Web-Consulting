@@ -29,16 +29,12 @@ select:invalid {
     color: lightslategray; 
 }
 
-.ng-valid[required], .ng-valid.required  {
-  border-left: 5px solid #42A948; /* green */
+input.ng-valid  {
+  border-left: 5px solid #42A948;  /* green */
 }
 
 input.ng-dirty.ng-invalid {
-  border-left: 5px solid #a94442; /* red */
-}
-
-.alert{
-    height: 25px
+  border-left: 5px solid #a94442;  /* red */
 }
 
 .alert-danger{

@@ -1,50 +1,41 @@
 <h1>Register</h1>
 <br/>
-
-<form (ngSubmit)="register()" [formGroup]="registerForm" >
+<form (ngSubmit)="register()" *ngIf="active" [formGroup]="registerForm" >
   <div class="form-group row">
-    <div class="col-xs-5">
+    <div class="col-xs-4">
       <label for="username">Display Name:</label>
-      <input class="form-control" [(ngModel)]="user.username" name="username" id="username" type="text" formControlName="username">
+      <input class="form-control" [(ngModel)]="user.username" name="username" type="text" formControlName="username">
     </div>
-    <div class="col-xs-7">
-      <div *ngIf="formErrors.username" class="alert alert-danger">
-        {{ formErrors.username }}
-      </div>
+    <div class="col-xs-8">
+        <div *ngIf="formErrors.username" class="alert alert-danger" [innerHTML]="formErrors.username"></div>
     </div>
   </div>
   <div class="form-group row">
-    <div class="col-xs-5">
+    <div class="col-xs-4">
       <label for="email">Email Address:</label>
-      <input class="form-control" [(ngModel)]="user.email" name="email" id="email" type="email" formControlName="email">
+      <input class="form-control" [(ngModel)]="user.email" name="email" type="email" formControlName="email">
     </div>
-    <div class="col-xs-7">
-      <div *ngIf="formErrors.email" class="alert alert-danger">
-        {{ formErrors.email }}
-      </div>
+    <div class="col-xs-8">
+        <div *ngIf="formErrors.email" class="alert alert-danger" [innerHTML]="formErrors.email"></div>
     </div>
   </div>
   <div class="form-group row">
-    <div class="col-xs-5">
+    <div class="col-xs-4">
       <label for="password">Password:</label>
-      <input class="form-control" [(ngModel)]="user.password" name="password" id="password" type="password" formControlName="password" required>
+      <input [equalValidator]="confirm_password" class="form-control" [(ngModel)]="user.password" name="password" type="password" formControlName="password">
     </div>
-    <div class="col-xs-7">
-      <div *ngIf="formErrors.password" class="alert alert-danger">
-        {{ formErrors.password }}
-      </div>
+    <div class="col-xs-8">
+        <div *ngIf="formErrors.password" class="alert alert-danger" [innerHTML]="formErrors.password"></div>
     </div>
   </div>
   <div class="form-group row">
-    <div class="col-xs-5">
+    <div class="col-xs-4">
       <label for="confirm_password">Confirm Password:</label>
-      <input class="form-control" [(ngModel)]="confirm_password" name="confirm_password" id="confirm_password" type="password" formControlName="confirm_password" required>
+      <input [equalValidator]="user.password" class="form-control" [(ngModel)]="confirm_password" name="confirm_password" type="password" formControlName="confirm_password">
     </div>
-    <div class="col-xs-7">
-      <div *ngIf="formErrors.confirm_password" class="alert alert-danger">
-        {{ formErrors.confirm_password }}
-      </div>
+    <div class="col-xs-8">
+        <div *ngIf="formErrors.confirm_password" class="alert alert-danger" [innerHTML]="formErrors.confirm_password"></div>
     </div>
   </div>
-  <button type="submit" class="btn btn-success">Submit</button>
+  <button type="submit" class="btn btn-success" [disabled]="registerForm.invalid">Sign Up</button>
 </form>

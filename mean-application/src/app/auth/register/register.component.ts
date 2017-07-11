@@ -1,6 +1,7 @@
 import { Component, OnInit, ViewChild, AfterViewChecked } from '@angular/core';
 import { NgForm, Validators, FormBuilder, FormGroup } from '@angular/forms';
 import { RegisterService } from './register.service';
+import { equalValidator } from '../../shared/equal-validator.directive';
 
 @Component({
   selector: 'app-register',
@@ -16,8 +17,11 @@ export class RegisterComponent implements OnInit {
   public formErrors;
   public validationMessages;
   public registerForm: FormGroup;
-  public user;
-  public confirm_password;
+  private user;
+  private confirm_password;
+  private active;
+  
+  // Inject services into our constructor
   constructor(private registerService: RegisterService, private fb: FormBuilder) { }
 
   ngOnInit() {
@@ -26,46 +30,49 @@ export class RegisterComponent implements OnInit {
       email: '',
       password: ''
     };
-    this.formErrors = {
-      'username': '',
-      'email': '',
-      'password': '',
-      'confirm_password': ''
-    };
+    this.formErrors = JSON.parse(JSON.stringify(this.user));
+    this.formErrors.confirm_password = '';
+    this.formErrors.custom = '';
     this.validationMessages = {
       'username': {
-        'required': 'Display name is required.',
-        'minlength': 'Display name must be at least 4 characters.',
-        'maxlength': 'Display name cannot be longer than 24 characters.',
-        'pattern': 'Display name is invalid.'
+        'required':   'Display name is required.',
+        'minlength':  'Display name must be at least 4 characters.',
+        'maxlength':  'Display name cannot be longer than 24 characters.',
+        'pattern':    'Display name is invalid.',
       },
       'email': {
-        'required': 'Email is required.',
-        'pattern': 'Email is invalid.'
+        'required':   'Email is required.',
+        'pattern':    'Email is invalid.'
       },
       'password':{
-        'required': 'Password is required.'
+        'required':   'Password is required.',
+        'equalValidator': 'Confirmation password must match original password.'
       },
       'confirm_password':{
-        'required': 'Confirmation password is required.'
+        'required':   'Confirmation password is required.',
+        'equalValidator': 'Confirmation password must match original password.'
       }
     };
+    
+    // Create the form logic and enable the form
     this.buildForm();
+    this.active = true;
   }// end onInit function
 
   buildForm(): void {
-
+    // use Regex patterns for "simple" matching
     let patterns = {
-      'username': '^[a-zA-Z0-9]+([-_\.][a-zA-Z0-9]+)*[a-zA-Z0-9]$',
+      'username': '^[a-zA-Z0-9]+([-_\.][a-zA-Z0-9]+)*([a-zA-Z0-9])*$',
       'email': /^(([^<>()\[\]\.,;:\s@\"]+(\.[^<>()\[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i
     };
 
+    // Create our form and set any validation rules 
     this.registerForm = this.fb.group({
       'username': [this.user.username, [
           Validators.required,
           Validators.pattern(patterns['username']),
           Validators.minLength(4),
-          Validators.maxLength(24)
+          Validators.maxLength(24),
         ]
       ],
       'email': [this.user.email, [
@@ -82,10 +89,11 @@ export class RegisterComponent implements OnInit {
         ]
       ]
     });
-  
+    
+    // Subscribe and call this function if data in the form changes
     this.registerForm.valueChanges.subscribe(data => this.onValueChanged(data));
-    this.onValueChanged(); // (re)set validation messages now
-  }
+    this.onValueChanged(); // set validation messages now
+  }// end buildForm function
 
   onValueChanged(data?: any) {
     if (!this.registerForm) { return; }
@@ -98,11 +106,17 @@ export class RegisterComponent implements OnInit {
  
       if (control && control.dirty && !control.valid) {
         const messages = this.validationMessages[field];
+        this.formErrors[field] = '<ul>';
+        
         for (const key in control.errors) {
-          this.formErrors[field] += messages[key] + ' ';
-        }
-      }
-    }
+          this.formErrors[field] += '<li>' + messages[key] + '</li>';
+        }// end for loop over all the errors
+
+        this.formErrors[field] += '</ul>';
+      }// end if the field has been modified and invalid
+
+    }// end for loop over all form errors
+
   }// end on value changed function
 
   register() {
