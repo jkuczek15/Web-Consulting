@@ -28,3 +28,22 @@
 select:invalid { 
     color: lightslategray; 
 }
+
+.ng-valid[required], .ng-valid.required  {
+  border-left: 5px solid #42A948; /* green */
+}
+
+input.ng-dirty.ng-invalid {
+  border-left: 5px solid #a94442; /* red */
+}
+
+.alert{
+    height: 25px
+}
+
+.alert-danger{
+    margin-top: 1.85em;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}

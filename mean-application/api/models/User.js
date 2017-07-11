@@ -2,9 +2,9 @@ var mongoose = require('mongoose');
 
 var UserSchema = new mongoose.Schema({
   username: String,
-  email_address: String,
+  email: String,
   password: String,
-  updated_at: { type: Date, default: Date.now },
+  updated_at: { type: Date, default: Date.now }
 });
 
 module.exports = mongoose.model('User', UserSchema);
