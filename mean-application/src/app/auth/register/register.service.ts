@@ -19,4 +19,4 @@ export class RegisterService {
     });
   }
 
-}
+}// end class RegisterService

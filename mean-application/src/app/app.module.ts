@@ -4,6 +4,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { SharedModule } from './shared/shared.module';
 
 // Services
 import { ChatService } from './common/chat/chat.service';
@@ -23,9 +24,6 @@ import { LoginComponent } from './auth/login/login.component';
 import { RegisterComponent } from './auth/register/register.component';
 import { ForumComponent } from './forum/forum.component';
 import { PlayComponent } from './play/play.component';
-
-// Directives
-import { EqualValidator } from './shared/equal-validator.directive';
 
 // Initialize routes array with index / HomeComponent
 const appRoutes: Routes = [{
@@ -67,8 +65,7 @@ appRoutes.push({
     ForumComponent,
     PlayComponent,
     LoginComponent,
-    RegisterComponent,
-    EqualValidator
+    RegisterComponent
   ],
   imports: [
     BrowserModule,
@@ -78,7 +75,8 @@ appRoutes.push({
     RouterModule.forRoot(
       appRoutes,
       // { enableTracing: true } // <-- debugging purposes only
-    )
+    ),
+    SharedModule
   ],
   providers: [
     ChatService, 

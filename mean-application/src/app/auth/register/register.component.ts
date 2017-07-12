@@ -1,5 +1,6 @@
 import { Component, OnInit, ViewChild, AfterViewChecked } from '@angular/core';
 import { NgForm, Validators, FormBuilder, FormGroup } from '@angular/forms';
+import {Router} from '@angular/router';
 import { RegisterService } from './register.service';
 
 @Component({
@@ -21,7 +22,9 @@ export class RegisterComponent implements OnInit {
   private active;
   
   // Inject services into our constructor
-  constructor(private registerService: RegisterService, private fb: FormBuilder) { }
+  constructor(private registerService: RegisterService, 
+              private fb: FormBuilder, 
+              private router: Router) { }
 
   ngOnInit() {
     this.user = {
@@ -50,7 +53,7 @@ export class RegisterComponent implements OnInit {
         'validateEqual': 'Confirmation password must match original password.'
       }
     };
-    
+
     // Create the form logic and enable the form
     this.buildForm();
     this.active = true;
@@ -117,7 +120,13 @@ export class RegisterComponent implements OnInit {
   }// end on value changed function
 
   register() {
-    console.log(this.user);
+    // We have passed all client-side validation, save the user
+    this.registerService.createUser(this.user).then((result) => {
+      // Navigate to the login page upon success
+      this.router.navigateByUrl('/login');
+    }, (err) => {
+      console.log(err);
+    });
   }// end register function
 
 }// end class RegisterComponent
