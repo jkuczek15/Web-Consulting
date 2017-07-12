@@ -1,47 +1,47 @@
-import { Directive, Input, OnChanges, SimpleChanges } from '@angular/core';
-import { AbstractControl, NG_VALIDATORS, Validator, ValidatorFn, Validators } from '@angular/forms';
-
-/** Custom equal validator for matching password and confirm password */
-export function equalValidator(password: string): ValidatorFn {
-  
-  return (control: AbstractControl): {[key: string]: any} => {
-    const confirm_password = control.value;
-    
-    const valid = confirm_password === password;
-    
-    console.log('-----------------------');
-    console.log('password: ' + password);
-    console.log('confirm_password: ' + confirm_password);
-    console.log('-----------------------');
-    return valid ? null : {'equalValidator': 'error'};
-  };
-}
+import { Directive, forwardRef, Attribute } from '@angular/core';
+import { Validator, AbstractControl, NG_VALIDATORS } from '@angular/forms';
 
 @Directive({
-  selector: '[equalValidator]',
-  providers: [{provide: NG_VALIDATORS, useExisting: EqualValidatorDirective, multi: true}]
+    selector: '[validateEqual][formControlName],[validateEqual][formControl],[validateEqual][ngModel]',
+    providers: [
+        { provide: NG_VALIDATORS, useExisting: forwardRef(() => EqualValidator), multi: true }
+    ]
 })
+export class EqualValidator implements Validator {
+    constructor(@Attribute('validateEqual') public validateEqual: string,
+    @Attribute('reverse') public reverse: string) {}
 
-export class EqualValidatorDirective implements Validator, OnChanges {
-  @Input() equalValidator: string;
-  private valFn = Validators.nullValidator;
-  
-  ngOnChanges(changes: SimpleChanges): void {
-    const change = changes['equalValidator'];
+    private get isReverse() {
+        if (!this.reverse) return false;
+        return this.reverse === 'true' ? true: false;
+    }// end function isReverse
 
-    
-    if (change) {
-      console.log(change);
-      const val: string | string = change.currentValue;
-      this.valFn = equalValidator(val);
-    } else {
-      this.valFn = Validators.nullValidator;
-    }// end if changes
+    validate(c: AbstractControl): { [key: string]: any } {
+        // self value
+        let v = c.value;
 
-  }// end ngOnChanges function
- 
-  validate(control: AbstractControl): {[key: string]: any} {
-    return this.valFn(control);
-  }// end validate function
+        // control vlaue
+        let e = c.root.get(this.validateEqual);
 
-}// end class EqualValidatorDirective
+        // value not equal
+        if (e && v !== e.value && !this.isReverse) {
+            return {
+                validateEqual: false
+            }
+        }// end if value not equal
+
+        // value equal and reverse
+        if (e && v === e.value && this.isReverse) {
+            delete e.errors['validateEqual'];
+            if (!Object.keys(e.errors).length) e.setErrors(null);
+        }// end if value equal
+
+        // value not equal and reverse
+        if (e && v !== e.value && this.isReverse) {
+            e.setErrors({ validateEqual: false });
+        }// end if value not equal
+
+        return null;
+    }// end function validate
+
+}// end class EqualValidator

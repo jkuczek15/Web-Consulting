@@ -1,6 +1,6 @@
 <h1>Register</h1>
 <br/>
-<form (ngSubmit)="register()" *ngIf="active" [formGroup]="registerForm" >
+<form (ngSubmit)="register()" *ngIf="active" [formGroup]="registerForm" novalidate>
   <div class="form-group row">
     <div class="col-xs-4">
       <label for="username">Display Name:</label>
@@ -22,7 +22,8 @@
   <div class="form-group row">
     <div class="col-xs-4">
       <label for="password">Password:</label>
-      <input [equalValidator]="confirm_password" class="form-control" [(ngModel)]="user.password" name="password" type="password" formControlName="password">
+      <input validateEqual="confirm_password" class="form-control" [(ngModel)]="user.password" name="password" type="password" 
+             formControlName="password" reverse="true">
     </div>
     <div class="col-xs-8">
         <div *ngIf="formErrors.password" class="alert alert-danger" [innerHTML]="formErrors.password"></div>
@@ -31,7 +32,8 @@
   <div class="form-group row">
     <div class="col-xs-4">
       <label for="confirm_password">Confirm Password:</label>
-      <input [equalValidator]="user.password" class="form-control" [(ngModel)]="confirm_password" name="confirm_password" type="password" formControlName="confirm_password">
+      <input validateEqual="password" class="form-control" [(ngModel)]="confirm_password" name="confirm_password" type="password" 
+             formControlName="confirm_password">
     </div>
     <div class="col-xs-8">
         <div *ngIf="formErrors.confirm_password" class="alert alert-danger" [innerHTML]="formErrors.confirm_password"></div>

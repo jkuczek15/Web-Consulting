@@ -25,7 +25,7 @@ import { ForumComponent } from './forum/forum.component';
 import { PlayComponent } from './play/play.component';
 
 // Directives
-import { EqualValidatorDirective } from './shared/equal-validator.directive';
+import { EqualValidator } from './shared/equal-validator.directive';
 
 // Initialize routes array with index / HomeComponent
 const appRoutes: Routes = [{
@@ -68,7 +68,7 @@ appRoutes.push({
     PlayComponent,
     LoginComponent,
     RegisterComponent,
-    EqualValidatorDirective
+    EqualValidator
   ],
   imports: [
     BrowserModule,

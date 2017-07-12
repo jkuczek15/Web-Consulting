@@ -1,7 +1,6 @@
 import { Component, OnInit, ViewChild, AfterViewChecked } from '@angular/core';
 import { NgForm, Validators, FormBuilder, FormGroup } from '@angular/forms';
 import { RegisterService } from './register.service';
-import { equalValidator } from '../../shared/equal-validator.directive';
 
 @Component({
   selector: 'app-register',
@@ -32,7 +31,6 @@ export class RegisterComponent implements OnInit {
     };
     this.formErrors = JSON.parse(JSON.stringify(this.user));
     this.formErrors.confirm_password = '';
-    this.formErrors.custom = '';
     this.validationMessages = {
       'username': {
         'required':   'Display name is required.',
@@ -44,13 +42,12 @@ export class RegisterComponent implements OnInit {
         'required':   'Email is required.',
         'pattern':    'Email is invalid.'
       },
-      'password':{
-        'required':   'Password is required.',
-        'equalValidator': 'Confirmation password must match original password.'
+      'password': {
+        'required':   'Password is required.'
       },
-      'confirm_password':{
+      'confirm_password': {
         'required':   'Confirmation password is required.',
-        'equalValidator': 'Confirmation password must match original password.'
+        'validateEqual': 'Confirmation password must match original password.'
       }
     };
     
