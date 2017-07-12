@@ -1,12 +1,14 @@
 // Required Modules
 import { BrowserModule } from '@angular/platform-browser';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { SharedModule } from './shared/shared.module';
 
 // Services
 import { ChatService } from './common/chat/chat.service';
+import { RegisterService } from './auth/register/register.service';
 
 // Main Application Components
 import { AppComponent } from './app.component';
@@ -68,13 +70,18 @@ appRoutes.push({
   imports: [
     BrowserModule,
     FormsModule,
+    ReactiveFormsModule,
     HttpModule,
     RouterModule.forRoot(
       appRoutes,
       // { enableTracing: true } // <-- debugging purposes only
-    )
+    ),
+    SharedModule
   ],
-  providers: [ChatService],
+  providers: [
+    ChatService, 
+    RegisterService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

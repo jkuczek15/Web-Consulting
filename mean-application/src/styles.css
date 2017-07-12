@@ -28,3 +28,18 @@
 select:invalid { 
     color: lightslategray; 
 }
+
+input.ng-valid  {
+  border-left: 5px solid #42A948;  /* green */
+}
+
+input.ng-dirty.ng-invalid {
+  border-left: 5px solid #a94442;  /* red */
+}
+
+.alert-danger{
+    margin-top: 1.85em;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}

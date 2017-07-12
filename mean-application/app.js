@@ -14,6 +14,7 @@ mongoose.connect('mongodb://localhost/mean-chat', {
 
 // Initialize our API route for Chat
 var chat = require('./api/routes/chat');
+var register = require('./api/routes/register');
 var app = express();
 
 // Initialize the node logger
@@ -24,6 +25,7 @@ app.use(express.static(path.join(__dirname, 'dist')));
 
 // add routes to our app
 app.use('/api/chat', chat);
+app.use('/api/register', register);
 
 // send the index file for any implicit routes
 app.get('/', function(req, res) {
