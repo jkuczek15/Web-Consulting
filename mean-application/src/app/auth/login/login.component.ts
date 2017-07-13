@@ -57,33 +57,9 @@ export class LoginComponent implements OnInit {
     });
     
     // Subscribe and call this function if data in the form changes
-    this.loginForm.valueChanges.subscribe(data => this.onValueChanged(data));
-    this.onValueChanged(); // set validation messages now
+    this.loginForm.valueChanges.subscribe(data => this.sharedModule.onValueChanged(this, 'loginForm', data));
+    this.sharedModule.onValueChanged(this, 'loginForm'); // set validation messages now
   }// end buildForm function
-
-  onValueChanged(data?: any) {
-    if (!this.loginForm) { return; }
-    const form = this.loginForm;
- 
-    for (const field in this.formErrors) {
-      // clear previous error message (if any)
-      this.formErrors[field] = '';
-      const control = form.get(field);
- 
-      if (control && control.dirty && !control.valid) {
-        const messages = this.validationMessages[field];
-        this.formErrors[field] = '<ul>';
-        
-        for (const key in control.errors) {
-          this.formErrors[field] += '<li>' + messages[key] + '</li>';
-        }// end for loop over all the errors
-
-        this.formErrors[field] += '</ul>';
-      }// end if the field has been modified and invalid
-
-    }// end for loop over all form errors
-
-  }// end on value changed function
 
   login() {
     // We have passed all client-side validation, save the user

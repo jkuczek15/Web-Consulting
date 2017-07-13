@@ -39,4 +39,29 @@ export class SharedModule {
       'email': /^(([^<>()\[\]\.,;:\s@\"]+(\.[^<>()\[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i
     };
 
+    // Shared 'onValueChanged' function for validating forms
+    public onValueChanged(component, formKey, data?: any) {
+      if (!component[formKey]) { return; }
+      const form = component[formKey];
+ 
+      for (const field in component.formErrors) {
+        // clear previous error message (if any)
+        component.formErrors[field] = '';
+        const control = form.get(field);
+  
+        if (control && control.dirty && !control.valid) {
+          const messages = this.validationMessages[field];
+          component.formErrors[field] = '<ul>';
+          
+          for (const key in control.errors) {
+            component.formErrors[field] += '<li>' + messages[key] + '</li>';
+          }// end for loop over all the errors
+
+          component.formErrors[field] += '</ul>';
+        }// end if the field has been modified and invalid
+
+      }// end for loop over all form errors
+
+    }// end onValueChanged function
+    
  }// end class SharedModule

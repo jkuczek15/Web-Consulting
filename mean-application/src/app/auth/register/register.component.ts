@@ -32,6 +32,8 @@ export class RegisterComponent implements OnInit {
   ngOnInit() {
     // Create a new user VM from the User interface
     this.user = new User.modelRegister();
+    
+    // Setup form errors and validation messages
     this.formErrors = JSON.parse(JSON.stringify(this.user));
     this.validationMessages = this.sharedModule.validationMessages;
 
@@ -69,33 +71,9 @@ export class RegisterComponent implements OnInit {
     });
     
     // Subscribe and call this function if data in the form changes
-    this.registerForm.valueChanges.subscribe(data => this.onValueChanged(data));
-    this.onValueChanged(); // set validation messages now
+    this.registerForm.valueChanges.subscribe(data => this.sharedModule.onValueChanged(this, 'registerForm', data));
+    this.sharedModule.onValueChanged(this, 'registerForm');
   }// end buildForm function
-
-  onValueChanged(data?: any) {
-    if (!this.registerForm) { return; }
-    const form = this.registerForm;
- 
-    for (const field in this.formErrors) {
-      // clear previous error message (if any)
-      this.formErrors[field] = '';
-      const control = form.get(field);
- 
-      if (control && control.dirty && !control.valid) {
-        const messages = this.validationMessages[field];
-        this.formErrors[field] = '<ul>';
-        
-        for (const key in control.errors) {
-          this.formErrors[field] += '<li>' + messages[key] + '</li>';
-        }// end for loop over all the errors
-
-        this.formErrors[field] += '</ul>';
-      }// end if the field has been modified and invalid
-
-    }// end for loop over all form errors
-
-  }// end on value changed function
 
   register() {
     // We have passed all client-side validation, save the user
