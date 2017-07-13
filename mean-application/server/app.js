@@ -9,7 +9,7 @@ mongoose.Promise = global.Promise;
 // Connect to mongoDB
 mongoose.connect('mongodb://localhost/mean-chat', {
     useMongoClient: true
-}).then(() =>  console.log('connection successful'))
+}).then(() =>  console.log('MongoDB Connection Successful'))
   .catch((err) => console.error(err));
 
 // Initialize our API route for Chat
