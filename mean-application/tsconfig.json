@@ -3,7 +3,7 @@
   "compilerOptions": {
     "outDir": "./dist/out-tsc",
     "allowJs": true, 
-    "baseUrl": "src",
+    "baseUrl": "client",
     "sourceMap": true,
     "declaration": false,
     "moduleResolution": "node",
