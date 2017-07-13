@@ -1,7 +1,9 @@
 import { Component, OnInit, ViewChild, AfterViewChecked } from '@angular/core';
 import { NgForm, Validators, FormBuilder, FormGroup } from '@angular/forms';
-import {Router} from '@angular/router';
+import { Router } from '@angular/router';
 import { RegisterService } from './register.service';
+import { SharedModule } from '../../shared/shared.module';
+import * as User from '../../../../api/models/interfaces/User.js';
 
 @Component({
   selector: 'app-register',
@@ -24,35 +26,14 @@ export class RegisterComponent implements OnInit {
   // Inject services into our constructor
   constructor(private registerService: RegisterService, 
               private fb: FormBuilder, 
-              private router: Router) { }
+              private router: Router,
+              private sharedModule: SharedModule) { }
 
   ngOnInit() {
-    this.user = {
-      username: '',
-      email: '',
-      password: ''
-    };
+    // Create a new user VM from the User interface
+    this.user = new User.modelRegister();
     this.formErrors = JSON.parse(JSON.stringify(this.user));
-    this.formErrors.confirm_password = '';
-    this.validationMessages = {
-      'username': {
-        'required':   'Display name is required.',
-        'minlength':  'Display name must be at least 4 characters.',
-        'maxlength':  'Display name cannot be longer than 24 characters.',
-        'pattern':    'Display name is invalid.',
-      },
-      'email': {
-        'required':   'Email is required.',
-        'pattern':    'Email is invalid.'
-      },
-      'password': {
-        'required':   'Password is required.'
-      },
-      'confirm_password': {
-        'required':   'Confirmation password is required.',
-        'validateEqual': 'Confirmation password must match original password.'
-      }
-    };
+    this.validationMessages = this.sharedModule.validationMessages;
 
     // Create the form logic and enable the form
     this.buildForm();
@@ -61,10 +42,7 @@ export class RegisterComponent implements OnInit {
 
   buildForm(): void {
     // use Regex patterns for "simple" matching
-    let patterns = {
-      'username': '^[a-zA-Z0-9]+([-_\.][a-zA-Z0-9]+)*([a-zA-Z0-9])*$',
-      'email': /^(([^<>()\[\]\.,;:\s@\"]+(\.[^<>()\[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i
-    };
+    let patterns = this.sharedModule.patterns;
 
     // Create our form and set any validation rules 
     this.registerForm = this.fb.group({
@@ -121,7 +99,7 @@ export class RegisterComponent implements OnInit {
 
   register() {
     // We have passed all client-side validation, save the user
-    this.registerService.createUser(this.user).then((result) => {
+    this.registerService.createUser(this.user).then((user) => {
       // Navigate to the login page upon success
       this.router.navigateByUrl('/login');
     }, (err) => {

@@ -3,13 +3,13 @@ import { Http, Headers } from '@angular/http';
 import 'rxjs/add/operator/map';
 
 @Injectable()
-export class RegisterService {
+export class LoginService {
 
   constructor(private http: Http) { }
 
-  createUser(data) {
+  getUser(data) {
     return new Promise((resolve, reject) => {
-        this.http.post('/api/register', data)
+        this.http.post('/api/login', data)
           .map(res => res.json())
           .subscribe(res => {
             resolve(res);
@@ -17,6 +17,6 @@ export class RegisterService {
             reject(err);
           });
     });
-  }// end function createUser
+  }// end function getUser
 
 }// end class RegisterService

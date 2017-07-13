@@ -9,6 +9,7 @@ import { SharedModule } from './shared/shared.module';
 // Services
 import { ChatService } from './common/chat/chat.service';
 import { RegisterService } from './auth/register/register.service';
+import { LoginService } from './auth/login/login.service';
 
 // Main Application Components
 import { AppComponent } from './app.component';
@@ -80,6 +81,7 @@ appRoutes.push({
   ],
   providers: [
     ChatService, 
+    LoginService,
     RegisterService
   ],
   bootstrap: [AppComponent]
