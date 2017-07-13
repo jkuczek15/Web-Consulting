@@ -36,17 +36,17 @@ export class ChatComponent implements OnInit, AfterViewChecked {
         this.scrollToBottom();
       }
     }.bind(this));
-  }
+  }// end function ngOnInit
 
   ngAfterViewChecked() {
     this.scrollToBottom();
-  }
+  }// end function ngAfterViewChecked
 
   scrollToBottom(): void {
     try {
       this.myScrollContainer.nativeElement.scrollTop = this.myScrollContainer.nativeElement.scrollHeight;
     } catch(err) { }
-  }
+  }// end function scrollToBottom
 
   getChatByRoom(room) {
     this.chatService.getChatByRoom(room).then((res) => {
@@ -54,7 +54,7 @@ export class ChatComponent implements OnInit, AfterViewChecked {
     }, (err) => {
       console.log(err);
     });
-  }
+  }// end function getChatByRoom
 
   joinRoom() {
     var date = new Date();
@@ -63,7 +63,7 @@ export class ChatComponent implements OnInit, AfterViewChecked {
     this.msgData = { room: this.newUser.room, nickname: this.newUser.nickname, message: '' };
     this.joinned = true;
     this.socket.emit('save-message', { room: this.newUser.room, nickname: this.newUser.nickname, message: 'Join this room', updated_at: date });
-  }
+  }// end function joinRoom
 
   sendMessage() {
     this.chatService.saveChat(this.msgData).then((result) => {
@@ -71,7 +71,7 @@ export class ChatComponent implements OnInit, AfterViewChecked {
     }, (err) => {
       console.log(err);
     });
-  }
+  }// end function sendMessage
 
   logout() {
     var date = new Date();
@@ -79,6 +79,6 @@ export class ChatComponent implements OnInit, AfterViewChecked {
     this.socket.emit('save-message', { room: user.room, nickname: user.nickname, message: 'Left this room', updated_at: date });
     localStorage.removeItem("user");
     this.joinned = false;
-  }
+  }// end function logout
 
-}
+}// end class ChatComponent

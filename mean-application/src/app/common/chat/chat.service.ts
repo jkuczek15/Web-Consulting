@@ -17,7 +17,7 @@ export class ChatService {
           reject(err);
         });
     });
-  }
+  }// end function getChatByRoom
 
   saveChat(data) {
     return new Promise((resolve, reject) => {
@@ -29,6 +29,6 @@ export class ChatService {
             reject(err);
           });
     });
-  }
+  }// end function saveChat
 
-}
+}// end class ChatService
