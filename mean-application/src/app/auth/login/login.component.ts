@@ -3,6 +3,7 @@ import { NgForm, Validators, FormBuilder, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
 import { LoginService } from './login.service';
 import { SharedModule } from '../../shared/shared.module';
+import * as User from '../../../../api/models/interfaces/User.js';
 
 @Component({
   selector: 'app-login',
@@ -28,12 +29,11 @@ export class LoginComponent implements OnInit {
               private sharedModule: SharedModule) { }
 
   ngOnInit() {
-    this.user = {
-      email: '',
-      password: ''
-    };
+    // Create a new user VM from the User interface
+    this.user = new User.modelLogin();
     this.formErrors = JSON.parse(JSON.stringify(this.user));
     this.validationMessages = this.sharedModule.validationMessages;
+    
     // Create the form logic and enable the form
     this.buildForm();
     this.active = true;
@@ -41,9 +41,7 @@ export class LoginComponent implements OnInit {
 
   buildForm(): void {
     // use Regex patterns for "simple" matching
-    let patterns = {
-      'email': /^(([^<>()\[\]\.,;:\s@\"]+(\.[^<>()\[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i
-    };
+    let patterns = this.sharedModule.patterns;
 
     // Create our form and set any validation rules 
     this.loginForm = this.fb.group({

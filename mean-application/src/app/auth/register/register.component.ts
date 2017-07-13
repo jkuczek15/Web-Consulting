@@ -3,6 +3,7 @@ import { NgForm, Validators, FormBuilder, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
 import { RegisterService } from './register.service';
 import { SharedModule } from '../../shared/shared.module';
+import * as User from '../../../../api/models/interfaces/User.js';
 
 @Component({
   selector: 'app-register',
@@ -29,13 +30,9 @@ export class RegisterComponent implements OnInit {
               private sharedModule: SharedModule) { }
 
   ngOnInit() {
-    this.user = {
-      username: '',
-      email: '',
-      password: ''
-    };
+    // Create a new user VM from the User interface
+    this.user = new User.modelRegister();
     this.formErrors = JSON.parse(JSON.stringify(this.user));
-    this.formErrors.confirm_password = '';
     this.validationMessages = this.sharedModule.validationMessages;
 
     // Create the form logic and enable the form
@@ -45,10 +42,7 @@ export class RegisterComponent implements OnInit {
 
   buildForm(): void {
     // use Regex patterns for "simple" matching
-    let patterns = {
-      'username': '^[a-zA-Z0-9]+([-_\.][a-zA-Z0-9]+)*([a-zA-Z0-9])*$',
-      'email': /^(([^<>()\[\]\.,;:\s@\"]+(\.[^<>()\[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i
-    };
+    let patterns = this.sharedModule.patterns;
 
     // Create our form and set any validation rules 
     this.registerForm = this.fb.group({

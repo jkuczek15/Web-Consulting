@@ -33,4 +33,10 @@ export class SharedModule {
         }
     };
 
+    // Shared regex patterns among forms
+    public patterns: any = {
+      'username': '^[a-zA-Z0-9]+([-_\.][a-zA-Z0-9]+)*([a-zA-Z0-9])*$',
+      'email': /^(([^<>()\[\]\.,;:\s@\"]+(\.[^<>()\[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i
+    };
+
  }// end class SharedModule
