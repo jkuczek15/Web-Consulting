@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { AuthService } from '../auth/auth.service';
 
 @Component({
   selector: 'app-profile',
@@ -7,9 +8,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ProfileComponent implements OnInit {
 
-  constructor() { }
+  // Initialize view model variables
+  private currentUser;
+  constructor(private authService: AuthService) { }
 
   ngOnInit() {
-  }
+    this.currentUser = this.authService.currentUser();
+  }// end ngOnInit function
 
-}
+}// end class ProfileComponent

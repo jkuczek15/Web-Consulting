@@ -42,7 +42,9 @@ export class AuthService {
       payload = JSON.parse(payload);
       return payload;
     }// end if the user is logged in
-
+    
+    // Return an empty object if no user to avoid undefined errors
+    return {};
   }// end function currentUser
 
   logout(){
