@@ -7,15 +7,15 @@ export class RegisterService {
 
   constructor(private http: Http) { }
 
-  createUser(data) {
+  register(data) {
     return new Promise((resolve, reject) => {
-        this.http.post('/api/register', data)
-          .map(res => res.json())
-          .subscribe(res => {
-            resolve(res);
-          }, (err) => {
-            reject(err);
-          });
+      this.http.post('/api/register', data)
+        .map(res => res.json())
+        .subscribe(res => {
+          resolve(res);
+        }, (err) => {
+          reject(err);
+        });
     });
   }// end function createUser
 

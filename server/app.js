@@ -4,17 +4,21 @@ var favicon = require('serve-favicon');
 var logger = require('morgan');
 var bodyParser = require('body-parser');
 var mongoose = require('mongoose');
-mongoose.Promise = global.Promise;
+var passport = require('passport');
+require('./api/models/User');
+require('./api/config/passport');
 
 // Connect to mongoDB
+mongoose.Promise = global.Promise;
 mongoose.connect('mongodb://localhost/mean-chat', {
     useMongoClient: true
 }).then(() =>  console.log('MongoDB Connection Successful'))
   .catch((err) => console.error(err));
 
-// Initialize our API route for Chat
+// Pull in our API routes
 var chat = require('./api/routes/chat');
 var login = require('./api/routes/login');
+var profile = require('./api/routes/profile');
 var register = require('./api/routes/register');
 var app = express();
 
@@ -24,9 +28,13 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({'extended':'false'}));
 app.use(express.static(path.join(__dirname, '/../', 'client', 'dist')));
 
-// add API routes to our app
+// Initialize passport for secure API auth
+app.use(passport.initialize());
+
+// Add API routes to our app
 app.use('/api/chat', chat);
 app.use('/api/login', login);
+app.use('/api/profile', profile);
 app.use('/api/register', register);
 
 // For all public routes, send our index.html file
@@ -35,21 +43,22 @@ app.get('*', function(req, res) {
   res.sendFile(path.join(__dirname, '/../', 'client', 'dist', 'index.html'));
 });
 
-// catch 404 and forward to error handler
+// Catch 404 and forward to error handler
 app.use(function(req, res, next) {
   var err = new Error('Not Found');
   err.status = 404;
   next(err);
 });
 
-// error handler
+// Error handler
 app.use(function(err, req, res, next) {
-  // set locals, only providing error in development
+  // Set locals, only providing error in development
   res.locals.message = err.message;
   res.locals.error = req.app.get('env') === 'development' ? err : {};
   
+  // Send our error messages to browser console for debugging
   res.status(err.status || 500);
-  res.render('error', {
+  res.send({
     message: err.message,
     error: err
   });

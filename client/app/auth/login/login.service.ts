@@ -7,7 +7,7 @@ export class LoginService {
 
   constructor(private http: Http) { }
 
-  getUser(data) {
+  login(data) {
     return new Promise((resolve, reject) => {
         this.http.post('/api/login', data)
           .map(res => res.json())

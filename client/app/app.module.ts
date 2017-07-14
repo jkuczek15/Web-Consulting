@@ -7,9 +7,11 @@ import { RouterModule, Routes } from '@angular/router';
 import { SharedModule } from './shared/shared.module';
 
 // Services
+import { AuthService } from './auth/auth.service';
 import { ChatService } from './common/chat/chat.service';
 import { RegisterService } from './auth/register/register.service';
 import { LoginService } from './auth/login/login.service';
+import { WindowService } from './common/window.service'
 
 // Main Application Components
 import { AppComponent } from './app.component';
@@ -25,6 +27,7 @@ import { LoginComponent } from './auth/login/login.component';
 import { RegisterComponent } from './auth/register/register.component';
 import { ForumComponent } from './forum/forum.component';
 import { PlayComponent } from './play/play.component';
+import { ProfileComponent } from './profile/profile.component';
 
 // Initialize routes array with index / HomeComponent
 const appRoutes: Routes = [{
@@ -37,7 +40,8 @@ const routerComponents: any = [
     LoginComponent,
     RegisterComponent,
     ForumComponent,
-    PlayComponent
+    PlayComponent,
+    ProfileComponent
 ];
 
 // Do not use the word 'Component' in any custom-components
@@ -60,13 +64,15 @@ appRoutes.push({
     ChatComponent,
     NavbarComponent,
     FooterComponent,
+    ProfileComponent,
     SidebarLeftComponent,
     SidebarRightComponent,
     HomeComponent,
     ForumComponent,
     PlayComponent,
     LoginComponent,
-    RegisterComponent
+    RegisterComponent,
+    ProfileComponent
   ],
   imports: [
     BrowserModule,
@@ -80,9 +86,11 @@ appRoutes.push({
     SharedModule
   ],
   providers: [
+    AuthService,
     ChatService, 
     LoginService,
-    RegisterService
+    RegisterService,
+    WindowService
   ],
   bootstrap: [AppComponent]
 })

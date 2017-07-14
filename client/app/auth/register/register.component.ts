@@ -2,6 +2,7 @@ import { Component, OnInit, ViewChild, AfterViewChecked } from '@angular/core';
 import { NgForm, Validators, FormBuilder, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
 import { RegisterService } from './register.service';
+import { AuthService } from '../auth.service';
 import { SharedModule } from '../../shared/shared.module';
 import * as UserVM from '../../shared/viewModels/User.js';
 
@@ -25,6 +26,7 @@ export class RegisterComponent implements OnInit {
   
   // Inject services into our constructor
   constructor(private registerService: RegisterService, 
+              private authService: AuthService,
               private fb: FormBuilder, 
               private router: Router,
               private sharedModule: SharedModule) { }
@@ -77,9 +79,11 @@ export class RegisterComponent implements OnInit {
 
   register() {
     // We have passed all client-side validation, save the user
-    this.registerService.createUser(this.user).then((user) => {
-      // Navigate to the login page upon success
-      this.router.navigateByUrl('/login');
+    this.registerService.register(this.user).then((data: any) => {
+      // User is created / authenticated
+      this.authService.saveToken(data.token);
+      // Navigate to the welcome page upon success
+      this.router.navigateByUrl('/');
     }, (err) => {
       console.log(err);
     });
