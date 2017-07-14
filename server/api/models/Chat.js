@@ -1,5 +1,6 @@
 var mongoose = require('mongoose');
 
+// Mongo DB Schema
 var ChatSchema = new mongoose.Schema({
   room: String,
   nickname: String,

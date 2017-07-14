@@ -2,6 +2,7 @@ import { Component, OnInit, ViewChild, AfterViewChecked } from '@angular/core';
 import { NgForm, Validators, FormBuilder, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
 import { LoginService } from './login.service';
+import { AuthService } from '../auth.service';
 import { SharedModule } from '../../shared/shared.module';
 import * as UserVM from '../../shared/viewModels/User.js';
 
@@ -26,6 +27,7 @@ export class LoginComponent implements OnInit {
   constructor(private fb: FormBuilder, 
               private router: Router,
               private loginService: LoginService,
+              private authService: AuthService,
               private sharedModule: SharedModule) { }
 
   ngOnInit() {
@@ -63,17 +65,18 @@ export class LoginComponent implements OnInit {
 
   login() {
     // We have passed all client-side validation, save the user
-    this.loginService.getUser(this.user).then((user: any[]) => {
-      // Navigate to the login page upon success
-      if(user && user.length > 0) {
-        // TODO: Do something to save the user data
-        console.log(user);
+    this.loginService.login(this.user).then((data: any) => {
+        // User is authenticated
+        this.authService.saveToken(data.token);
+        // Navigate to the welcome page upon success
         this.router.navigateByUrl('/');
-      }else{
-        this.formErrors['topLevel'] = this.sharedModule.validationMessages['auth']['incorrectLogin'];
-      }// end if we got a valid user from data
     }, (err) => {
-      console.log(err);
+      if(err.status === 401){
+        // User is unauthorized
+        this.formErrors['topLevel'] = JSON.parse(err._body).message;
+      }else{
+        console.log(err);  
+      }// end if status is 401
     });
   }// end register function
 
