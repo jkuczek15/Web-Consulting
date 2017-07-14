@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Http, Headers } from '@angular/http';
 import { WindowService } from '../common/window.service';
+import { Router } from '@angular/router';
 import 'rxjs/add/operator/map';
 
 @Injectable()
@@ -8,17 +9,18 @@ export class AuthService {
   // Use the client window sessionStorage for local storage
   public window;
   constructor(private http: Http,
-              private winRef: WindowService) { this.window = winRef.nativeWindow; }
+              private winRef: WindowService,
+              private router: Router) { this.window = winRef.nativeWindow; }
 
-  saveToken(token){
+  saveToken(token) {
     this.window.sessionStorage['auth_token'] = token;
   }// end function saveToken
 
-  getToken(){
+  getToken() {
     return this.window.sessionStorage['auth_token'];
   }// end function getToken
 
-  loggedIn(){
+  loggedIn() {
     let token = this.getToken();
     let payload;
 
@@ -33,7 +35,7 @@ export class AuthService {
 
   }// end function loggedIn
 
-  currentUser(){
+  currentUser() {
     // Return data about the currently logged in user
     if(this.loggedIn()){
       var token = this.getToken();
@@ -41,14 +43,25 @@ export class AuthService {
       payload = window.atob(payload);
       payload = JSON.parse(payload);
       return payload;
+    }else{
+      // Return an empty object if no user to avoid undefined errors
+      return {};
     }// end if the user is logged in
     
-    // Return an empty object if no user to avoid undefined errors
-    return {};
   }// end function currentUser
 
   logout(){
     window.sessionStorage.removeItem('auth_token');
+    this.router.navigateByUrl('/login');
   }// end function logout
+
+  public requireLogin() {
+    // Include this at the top of 'ngOnInit' to require login
+    if(!this.loggedIn()){
+      // user is not logged in, send them to the welcome page
+      this.router.navigateByUrl('/');
+    }// end if the user is not logged in
+
+  }// end function to simpfy required login logic
   
 }// end class AuthService

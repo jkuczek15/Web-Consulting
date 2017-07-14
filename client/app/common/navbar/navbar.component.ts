@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../../auth/auth.service';
-import { Router, NavigationEnd } from '@angular/router';
+import { SharedModule } from '../../shared/shared.module';
 import 'rxjs/add/operator/filter';
 
 @Component({
@@ -14,19 +14,19 @@ export class NavbarComponent implements OnInit {
   private loggedIn;
 
   constructor(private authService: AuthService,
-              private router: Router) { }
+              private sharedModule: SharedModule) { }
 
   ngOnInit() {
-    this.router.events.filter(event => (event instanceof NavigationEnd))
-          .subscribe((routeData: any) => {
-            this.loggedIn = this.authService.loggedIn();
-          });
-    this.loggedIn = this.authService.loggedIn();
+    let self = this;
+    // Function to be called each time the route changes
+    this.sharedModule.onRouteChange(function() {
+      self.loggedIn = self.authService.loggedIn();
+    });
   }// end ngOnInit function
 
-  logout(){
-    this.authService.logout();
+  logout() {
     this.loggedIn = false;
+    this.authService.logout();
     return false;
   }// end logout function
 

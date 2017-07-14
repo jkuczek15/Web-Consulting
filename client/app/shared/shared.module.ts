@@ -1,7 +1,7 @@
 import { NgModule }     from '@angular/core';
 import { CommonModule } from '@angular/common';
-
 import { EqualValidator } from './directives/equal-validator.directive';
+import { Router, NavigationEnd } from '@angular/router';
 
 @NgModule({
   imports:      [ CommonModule],
@@ -9,6 +9,9 @@ import { EqualValidator } from './directives/equal-validator.directive';
   exports:      [ EqualValidator, CommonModule ]
 })
 export class SharedModule {
+
+    constructor(private router: Router) { }
+
     // Shared validation messages among forms
     public validationMessages: any = {
         'username': {
@@ -39,13 +42,13 @@ export class SharedModule {
       'email': /^(([^<>()\[\]\.,;:\s@\"]+(\.[^<>()\[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i
     };
 
-    // Shared 'onValueChanged' function for validating forms
+    // Shared 'onValueChanged' function for executing code each time form input changes
     public onValueChanged(component, formKey, data?: any) {
       if (!component[formKey]) { return; }
       const form = component[formKey];
  
       for (const field in component.formErrors) {
-        // clear previous error message (if any)
+        // Clear previous error message (if any)
         component.formErrors[field] = '';
         const control = form.get(field);
   
@@ -63,5 +66,13 @@ export class SharedModule {
       }// end for loop over all form errors
 
     }// end onValueChanged function
-    
+
+    // Shared 'onRouteChange' function executing code each time route changes
+    public onRouteChange(funct) {
+      this.router.events.filter(event => (event instanceof NavigationEnd)).subscribe((routeData: any) => {
+        // Upon completition of route change, call our custom function
+        funct(routeData);
+      });
+    }// end shared module function for setting an 'onRouteChange' event
+
  }// end class SharedModule

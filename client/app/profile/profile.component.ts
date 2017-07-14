@@ -10,9 +10,10 @@ export class ProfileComponent implements OnInit {
 
   // Initialize view model variables
   private currentUser;
-  constructor(private authService: AuthService) { }
+  constructor(private authService: AuthService ) { }
 
   ngOnInit() {
+    this.authService.requireLogin();
     this.currentUser = this.authService.currentUser();
   }// end ngOnInit function
 
