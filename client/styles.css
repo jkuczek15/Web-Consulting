@@ -25,10 +25,12 @@
     height: 100%;
 }
 
+/* Set select boxes to be light gray when invalid */
 select:invalid { 
     color: lightslategray; 
 }
 
+/* Angular set custom green and red when filling out a form */
 input.ng-valid  {
   border-left: 5px solid #42A948;  /* green */
 }
@@ -37,9 +39,21 @@ input.ng-dirty.ng-invalid {
   border-left: 5px solid #a94442;  /* red */
 }
 
-.alert-danger{
-    margin-top: 1.85em;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+/* Make it so alerts don't change position of form inputs */
+.alert {
+  margin-top: 15px;
+  position: absolute;
+  float: left;
 }
+
+/* Custom Bootstrap table styling */
+table {
+    border-collapse: separate;
+    border-spacing: 0 5px;
+}
+
+thead th {
+    background-color: #068B8A;
+    color: white;
+}
+/* End Bootstrap table styling */

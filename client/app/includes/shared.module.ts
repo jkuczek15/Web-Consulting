@@ -15,24 +15,21 @@ export class SharedModule {
     // Shared validation messages among forms
     public validationMessages: any = {
         'username': {
-          'required':   'Display name is required.',
+          'required':   'Display name is a required field.',
           'minlength':  'Display name must be at least 4 characters.',
           'maxlength':  'Display name cannot be longer than 24 characters.',
           'pattern':    'Display name is invalid.',
         },
         'email': {
-          'required':   'Email is required.',
-          'pattern':    'Email is invalid.'
+          'required':   'Email address is a required field.',
+          'pattern':    'Email address is invalid.'
         },
         'password': {
-          'required':   'Password is required.'
+          'required':   'Password is a required field.'
         },
         'confirm_password': {
-          'required':   'Confirmation password is required.',
+          'required':   'Confirmation password is a required field.',
           'validateEqual': 'Confirmation password must match original password.'
-        },
-        'auth': {
-          'incorrectLogin': 'Incorrect email address or password.'
         }
     };
 
@@ -54,13 +51,21 @@ export class SharedModule {
   
         if (control && control.dirty && !control.valid) {
           const messages = this.validationMessages[field];
-          component.formErrors[field] = '<ul>';
-          
-          for (const key in control.errors) {
-            component.formErrors[field] += '<li>' + messages[key] + '</li>';
-          }// end for loop over all the errors
 
-          component.formErrors[field] += '</ul>';
+          if(Object.keys(control.errors).length > 1){
+            // we have a list of errors, created an unordered list
+            component.formErrors[field] = '<ul>';
+            
+            for (const key in control.errors) {
+              component.formErrors[field] += '<li>' + messages[key] + '</li>';
+            }// end for loop over all the errors
+
+            component.formErrors[field] += '</ul>';
+          }else{
+            // there is only one error, dont make a list, just grab the 1st key
+            component.formErrors[field] += messages[Object.keys(control.errors)[0]];
+          }// end if we have more than one error
+          
         }// end if the field has been modified and invalid
 
       }// end for loop over all form errors
