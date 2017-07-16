@@ -10,7 +10,7 @@ require('./api/config/passport');
 
 // Connect to mongoDB
 mongoose.Promise = global.Promise;
-mongoose.connect('mongodb://localhost/mean-chat', {
+mongoose.connect('mongodb://localhost/database', {
     useMongoClient: true
 }).then(() =>  console.log('MongoDB Connection Successful'))
   .catch((err) => console.error(err));
