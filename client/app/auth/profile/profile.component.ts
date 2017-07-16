@@ -27,7 +27,9 @@ export class ProfileComponent implements OnInit {
       // Format our date to look pretty
       this.currentUser.created = moment(this.currentUser.created).format('MMMM Do YYYY, h:mm:ss a');
     }, (err) => {
-      console.log(err);
+      if(err.status !== 401){
+        console.log(err);
+      }// end if not unauthorized error
     });
   }// end ngOnInit function
 
