@@ -4,14 +4,16 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { SharedModule } from './shared/shared.module';
+import { SharedModule } from './includes/shared.module';
 
 // Services
 import { AuthService } from './auth/auth.service';
-import { ChatService } from './common/chat/chat.service';
-import { RegisterService } from './auth/register/register.service';
 import { LoginService } from './auth/login/login.service';
-import { WindowService } from './common/window.service'
+import { RegisterService } from './auth/register/register.service';
+import { ProfileService } from './auth/profile/profile.service';
+import { ChatService } from './common/chat/chat.service';
+import { HttpClient } from './includes/http-client.service'
+import { WindowService } from './includes/window.service'
 
 // Main Application Components
 import { AppComponent } from './app.component';
@@ -25,9 +27,9 @@ import { ChatComponent } from './common/chat/chat.component';
 // Router Components
 import { LoginComponent } from './auth/login/login.component';
 import { RegisterComponent } from './auth/register/register.component';
+import { ProfileComponent } from './auth/profile/profile.component';
 import { ForumComponent } from './forum/forum.component';
 import { PlayComponent } from './play/play.component';
-import { ProfileComponent } from './profile/profile.component';
 
 // Initialize routes array with index / HomeComponent
 const appRoutes: Routes = [{
@@ -35,7 +37,8 @@ const appRoutes: Routes = [{
     component: HomeComponent,
 }];
 
-// Initialize custom routes array
+// Add components to this array if you want the client
+// to be able to route to the page using a URL
 const routerComponents: any = [
     LoginComponent,
     RegisterComponent,
@@ -87,8 +90,10 @@ appRoutes.push({
   ],
   providers: [
     AuthService,
-    ChatService, 
+    ChatService,
+    HttpClient, 
     LoginService,
+    ProfileService,
     RegisterService,
     WindowService
   ],

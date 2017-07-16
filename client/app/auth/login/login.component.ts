@@ -3,8 +3,8 @@ import { NgForm, Validators, FormBuilder, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
 import { LoginService } from './login.service';
 import { AuthService } from '../auth.service';
-import { SharedModule } from '../../shared/shared.module';
-import * as UserVM from '../../shared/viewModels/User.js';
+import { SharedModule } from '../../includes/shared.module';
+import * as UserVM from '../../includes/viewModels/User.js';
 
 @Component({
   selector: 'app-login',
@@ -27,14 +27,14 @@ export class LoginComponent implements OnInit {
   constructor(private fb: FormBuilder, 
               private router: Router,
               private loginService: LoginService,
-              private authService: AuthService,
-              private sharedModule: SharedModule) { }
+              private authentication: AuthService,
+              private shared: SharedModule) { }
 
   ngOnInit() {
     // Create a new user VM from the User interface
-    this.user = new UserVM.modelLogin();
+    this.user = new UserVM.Login();
     this.formErrors = JSON.parse(JSON.stringify(this.user));
-    this.validationMessages = this.sharedModule.validationMessages;
+    this.validationMessages = this.shared.validationMessages;
     
     // Create the form logic and enable the form
     this.buildForm();
@@ -43,7 +43,7 @@ export class LoginComponent implements OnInit {
 
   buildForm(): void {
     // use Regex patterns for "simple" matching
-    let patterns = this.sharedModule.patterns;
+    let patterns = this.shared.patterns;
 
     // Create our form and set any validation rules 
     this.loginForm = this.fb.group({
@@ -59,21 +59,21 @@ export class LoginComponent implements OnInit {
     });
     
     // Subscribe and call this function if data in the form changes
-    this.loginForm.valueChanges.subscribe(data => this.sharedModule.onValueChanged(this, 'loginForm', data));
-    this.sharedModule.onValueChanged(this, 'loginForm'); // set validation messages now
+    this.loginForm.valueChanges.subscribe(data => this.shared.onValueChanged(this, 'loginForm', data));
+    this.shared.onValueChanged(this, 'loginForm'); // set validation messages now
   }// end buildForm function
 
   login() {
     // We have passed all client-side validation, save the user
     this.loginService.login(this.user).then((data: any) => {
         // User is authenticated
-        this.authService.saveToken(data.token);
+        this.authentication.saveToken(data.token);
         // Navigate to the welcome page upon success
         this.router.navigateByUrl('/');
     }, (err) => {
       if(err.status === 401){
         // User is unauthorized
-        this.formErrors['topLevel'] = JSON.parse(err._body).message;
+        this.formErrors['email'] = JSON.parse(err._body).message;
       }else{
         console.log(err);  
       }// end if status is 401

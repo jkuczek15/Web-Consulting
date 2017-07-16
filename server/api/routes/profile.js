@@ -14,10 +14,9 @@ router.get('/', authConfig.auth, function(req, res, next) {
     });
   } else {
     // Otherwise continue
-    User.findById(req.payload._id)
-        .exec(function(err, user) {
-        res.status(200).json(user);
-      });
+    User.findById(req.payload._id).exec(function(err, user) {
+      res.status(200).json(user);
+    });
   }// end if we don't have the required payload ID
 });
 

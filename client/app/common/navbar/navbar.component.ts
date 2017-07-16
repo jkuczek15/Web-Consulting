@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../../auth/auth.service';
-import { SharedModule } from '../../shared/shared.module';
+import { SharedModule } from '../../includes/shared.module';
 import 'rxjs/add/operator/filter';
 
 @Component({
