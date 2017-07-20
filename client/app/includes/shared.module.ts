@@ -30,7 +30,8 @@ export class SharedModule {
         'confirm_password': {
           'required':   'Confirmation password is a required field.',
           'validateEqual': 'Confirmation password must match original password.'
-        }
+        },
+        'auth_required' : 'Login is required before proceeding.'
     };
 
     // Shared regex patterns among forms

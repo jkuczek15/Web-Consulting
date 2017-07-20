@@ -8,6 +8,7 @@ import 'rxjs/add/operator/map';
 export class AuthService {
   // Use the client window sessionStorage for local storage
   public window;
+  public storedURL;
   constructor(private http: Http,
               private winRef: WindowService,
               private router: Router) { this.window = winRef.nativeWindow; }
@@ -57,9 +58,10 @@ export class AuthService {
 
   public requireLogin() {
     // Include this at the top of 'ngOnInit' to require login
-    if(!this.loggedIn()){
-      // user is not logged in, send them to the welcome page
-      this.router.navigateByUrl('/');
+    if(!this.loggedIn()) {
+      // user is not logged in, send them to the login page with an error
+      this.storedURL = this.router.url;
+      this.router.navigateByUrl('/login/auth_required');
     }// end if the user is not logged in
 
   }// end function to simpfy required login logic

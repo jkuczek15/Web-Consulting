@@ -47,12 +47,37 @@ const routerComponents: any = [
     ProfileComponent
 ];
 
+// Begin adding application routes
+let addAppRoute = function(routePath, component, optionalParams) {
+  // Function for adding a new app route to the Angular Router
+  if(optionalParams.length > 0) {
+    // We have optional parameters to add to the route    
+    optionalParams.forEach(function (param) {
+      appRoutes.push({
+        path: routePath + '/:' + param,
+        component: component
+      });
+    });// end for loop over optional parameters
+
+  }// end if we have optional parameters
+
+  // Add our default route to the array
+  appRoutes.push({
+      path: routePath,
+      component: component
+  });
+};
+
 // Do not use the word 'Component' in any custom-components
 routerComponents.forEach(function (comp) {
-  appRoutes.push({
-      path: comp.name.replace('Component', '').toLowerCase(),
-      component: comp
-  });
+  let routePath = comp.name.replace('Component', '').toLowerCase();
+  let optionalParams = [];
+
+  if(routePath == 'login') {
+    optionalParams.push('error');
+  }// end if routePath is login
+
+  addAppRoute(routePath, comp, optionalParams);
 });
 
 // Take invalid routes and redirect users to index

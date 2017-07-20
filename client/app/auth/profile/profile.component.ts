@@ -25,7 +25,7 @@ export class ProfileComponent implements OnInit {
     this.profileService.getProfile().then((data: any) => {
       this.currentUser = data;
       // Format our date to look pretty
-      this.currentUser.created = moment(this.currentUser.created).format('MMMM Do YYYY, h:mm:ss a');
+      this.currentUser.created = moment(this.currentUser.created).format('MMMM Do YYYY, h:mm a');
     }, (err) => {
       if(err.status !== 401){
         console.log(err);
