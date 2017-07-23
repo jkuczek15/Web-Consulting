@@ -74,6 +74,7 @@ export class RegisterComponent implements OnInit {
     
     // Subscribe and call this function if data in the form changes
     this.registerForm.valueChanges.subscribe(data => this.shared.onValueChanged(this, 'registerForm', data));
+    // Set validation messages now
     this.shared.onValueChanged(this, 'registerForm');
   }// end buildForm function
 

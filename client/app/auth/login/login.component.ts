@@ -49,11 +49,11 @@ export class LoginComponent implements OnInit, AfterViewChecked {
       // Subscribe to route parameter changes after the DOM is ready
       if(!params.error){
         this.authentication.storedURL = null;
-      }// end if we need to reset the storedURL
-
-      // Set the authentication form error
-      this.formErrors['email'] = this.validationMessages[params.error];
-      this.cd.detectChanges();
+      }else{
+        // Set the authentication form error
+        this.formErrors['email'] = this.validationMessages[params.error];
+        this.cd.detectChanges();
+      }// end if we need to reset the storedURL      
     });
   }// end ngAfterViewChecked function (DOM READY)
 
@@ -86,7 +86,7 @@ export class LoginComponent implements OnInit, AfterViewChecked {
         // User is authenticated, store the token
         this.authentication.saveToken(data.token);
         // Navigate to the stored page or the index page depending on the request
-        this.router.navigateByUrl(this.authentication.storedURL || '/');
+        this.router.navigateByUrl(this.authentication.storedURL || '/profile');
     }, (err) => {
       if(err.status === 401){
         // User is unauthorized
