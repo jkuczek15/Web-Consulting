@@ -21,6 +21,7 @@ export class AppComponent implements OnInit {
     // Function to be called each time the route changes
     this.shared.onRouteChange(function() {
       let url = self.router.url;
+      // Modify these arrays to hide/show components on different pages
       self.show_sidebar_left = ['/'].indexOf(url) == -1;
       self.show_sidebar_right = ['/'].indexOf(url) == -1;
     });

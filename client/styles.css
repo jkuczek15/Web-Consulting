@@ -5,8 +5,13 @@
    
 /* Set height of the grid so .sidenav can be 100% (adjust as needed) */
 .row.content {
-    height: 578px; 
+    height: 589px; 
     overflow: hidden;
+}
+
+/* Remove Twitter Bootstrap rounded corners on all elements */
+* {
+  border-radius: 0 !important;
 }
 
 /* On small screens, set height to 'auto' for sidenav and grid */
