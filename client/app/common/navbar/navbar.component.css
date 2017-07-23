@@ -1,4 +1,7 @@
 /* You can add global styles to this file, and also import other style files */
+.navbar {
+  margin-bottom: 0;
+}
 .navbar-default {
   background-color: #068b8a;
   border-color: #068b8a;

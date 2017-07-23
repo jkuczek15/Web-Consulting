@@ -5,7 +5,7 @@
    
 /* Set height of the grid so .sidenav can be 100% (adjust as needed) */
 .row.content {
-    height: 39.857em; 
+    height: 578px; 
     overflow: hidden;
 }
 
@@ -16,13 +16,6 @@
         padding: 1.07em;
     }
     .row.content {height:auto;} 
-}
-
-/* Set gray background color and 100% height */
-.sidenav {
-    padding-top: 1.43em;
-    background-color: #f1f1f1;
-    height: 100%;
 }
 
 /* Set select boxes to be light gray when invalid */

@@ -1,0 +1,29 @@
+/* Main parent flex class */
+.flex-container {
+  padding: 0;
+  margin: 0;
+  list-style: none;
+  display: flex; /* or inline-flex */
+  flex-direction: row;
+  justify-content: flex-start;
+}
+
+/* Flex item class */
+.item {
+  flex-grow: 1; /* default 0 */
+}
+
+/* Sidebar flex item */
+.item-sidebar {
+  text-align: center;
+  max-width: 450px;
+  padding-top: 1.43em;
+  background-color: #f1f1f1;
+  height: 100%;
+  flex-grow: 0.075; /* default 0 */
+}
+
+/* Flexbox item spacing */
+.item-spacing {
+  padding-right: 40px;
+}

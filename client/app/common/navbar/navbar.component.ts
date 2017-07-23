@@ -14,12 +14,12 @@ export class NavbarComponent implements OnInit {
   private loggedIn;
 
   constructor(private authService: AuthService,
-              private sharedModule: SharedModule) { }
+              private shared: SharedModule) { }
 
   ngOnInit() {
     let self = this;
     // Function to be called each time the route changes
-    this.sharedModule.onRouteChange(function() {
+    this.shared.onRouteChange(function() {
       self.loggedIn = self.authService.loggedIn();
     });
   }// end ngOnInit function
