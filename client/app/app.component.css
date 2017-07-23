@@ -15,7 +15,7 @@
 
 /* Sidebar flex item */
 .item-sidebar {
-  text-align: center;
+  margin-left: 5px;
   max-width: 450px;
   padding-top: 1.43em;
   background-color: #f1f1f1;
