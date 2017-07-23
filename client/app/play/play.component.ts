@@ -22,7 +22,7 @@ export class PlayComponent implements OnInit, AfterViewInit {
 
   ngOnInit() {
     // Require that the user be logged in
-    // this.authentication.requireLogin();
+    this.authentication.requireLogin();
     self = this;
   }// end ngOnInit function
 
@@ -59,17 +59,16 @@ export class PlayComponent implements OnInit, AfterViewInit {
   }// end ngAfterViewInit function
 
   keyPress(event) { 
-    // handle user keyboard input
-    event.preventDefault();
-    let type = event.type;
-
-    if(type === 'keydown') {
+    // handle user keyboard input  
+    if(event.code != 'F12'){
+      // allow developer tools
+      event.preventDefault();
+    }// end if event code is not F12
+  
+    if(event.type === 'keydown') {
       // user pressed a key
       handleInput(event.code);
-    } else {
-      // user just released a key
-
-    }// end if type === keydown
+    }// end if type == 'keydown'
 
   }// end function keyPress
   
@@ -85,23 +84,25 @@ var handleInput = function(key) {
   // handle moving the player
   switch(key) {
     case 'ArrowLeft':
+    case 'KeyA':
         if(player.x > RADIUS)
           player.x -= SPEED;                
         break;
     case 'ArrowRight':
+    case 'KeyD':
         if(player.x < canvas.width - RADIUS)
           player.x += SPEED;
         break;
     case 'ArrowUp':
+    case 'KeyW':
         if(player.y > RADIUS)
           player.y -= SPEED;
         break;
     case 'ArrowDown':
+    case 'KeyS':
         if(player.y < canvas.height - RADIUS)
           player.y += SPEED;
         break;
-    default:
-        console.log(key);
   }// end switch statement handling input
   
   // refresh the stage
