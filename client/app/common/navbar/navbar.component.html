@@ -12,7 +12,7 @@
       <div class="collapse navbar-collapse" id="navcol-1">
           <ul class="nav navbar-nav">
               <li routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }"><a routerLink="/">Home</a></li>
-              <li routerLinkActive="active"><a routerLink="/forum">Forum</a></li>
+              <li *ngIf="loggedIn" routerLinkActive="active"><a routerLink="/forum">Forum</a></li>
               <li *ngIf="loggedIn" routerLinkActive="active"><a routerLink="/play">Play</a></li>
           </ul>
           <ul *ngIf="!loggedIn" class="nav navbar-nav navbar-right">

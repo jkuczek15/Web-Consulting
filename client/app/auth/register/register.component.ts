@@ -32,6 +32,7 @@ export class RegisterComponent implements OnInit {
               private shared: SharedModule) { }
 
   ngOnInit() {
+    this.authentication.redirectIfLoggedIn('/profile');
     // Create a new user VM from the User interface
     this.user = new UserVM.Register();
     

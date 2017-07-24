@@ -55,7 +55,7 @@ table {
 }
 
 thead th {
-    background-color: #068B8A;
+    background-color: #000000;
     color: white;
 }
 /* ###### [/ Bootstrap Tables] ###### */
@@ -98,7 +98,7 @@ input:focus ~ label, input:valid ~ label {
 .bar {
   position:relative;
   display:block;
-  width:300px;
+  width:270px;
 }
 
 .bar:before, .bar:after {
