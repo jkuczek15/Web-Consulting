@@ -9,6 +9,10 @@
     overflow: hidden;
 }
 
+body { 
+  padding-top: 50px; 
+}
+
 /* Remove Twitter Bootstrap rounded corners on all elements */
 * {
   border-radius: 0 !important;

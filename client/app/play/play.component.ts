@@ -71,6 +71,12 @@ export class PlayComponent implements OnInit, AfterViewInit {
     }// end if type == 'keydown'
 
   }// end function keyPress
+
+  ngOnDestroy() {
+    // Remove the keyboard event listeners once we switch components
+    window.removeEventListener("keydown", this.keyPress);
+    window.removeEventListener("keyup", this.keyPress);
+  }// end ngOnDestroy function
   
 }// end class PlayComponent
 
@@ -108,4 +114,3 @@ var handleInput = function(key) {
   // refresh the stage
   self.stage.update();
 }// end function handleInput
-

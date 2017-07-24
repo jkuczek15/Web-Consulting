@@ -17,10 +17,12 @@
 .item-sidebar {
   margin-left: 5px;
   max-width: 450px;
-  padding-top: 1.43em;
-  background-color: #f1f1f1;
   height: 100%;
   flex-grow: 0.075; /* default 0 */
+}
+
+.sidenav {
+  background-color: #f1f1f1;
 }
 
 /* Flexbox item spacing */
