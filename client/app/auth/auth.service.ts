@@ -56,7 +56,7 @@ export class AuthService {
     this.router.navigateByUrl('/login');
   }// end function logout
 
-  public requireLogin() {
+  requireLogin() {
     // Include this at the top of 'ngOnInit' to require login
     if(!this.loggedIn()) {
       // user is not logged in, send them to the login page with an error
@@ -65,5 +65,13 @@ export class AuthService {
     }// end if the user is not logged in
 
   }// end function to simpfy required login logic
+
+  redirectIfLoggedIn(url) {
+    // Redirect a user to 'url' if they are logged in
+    if(this.loggedIn()){
+      this.router.navigateByUrl(url);
+    }// end if the user is logged in
+
+  }// end function to redirect the user if they are logged in
   
 }// end class AuthService

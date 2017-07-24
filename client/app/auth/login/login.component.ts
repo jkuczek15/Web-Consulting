@@ -34,6 +34,7 @@ export class LoginComponent implements OnInit, AfterViewChecked {
               private shared: SharedModule) {this.error = route.params.map(p => p.error); }
 
   ngOnInit() {
+    this.authentication.redirectIfLoggedIn('/profile');
     // Create a new user VM from the User interface
     this.user = new UserVM.Login();
     this.formErrors = JSON.parse(JSON.stringify(this.user));

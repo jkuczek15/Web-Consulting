@@ -33,14 +33,31 @@ export class AppComponent implements OnInit {
 
       if(self.authentication.loggedIn()) {
         // user is logged in, determine when to show sidebars
-        self.show_sidebar_left = no_sidebar_left.indexOf(url) == -1;
+        self.displayHandler(url, no_sidebar_left, 'show_sidebar_left');
       } else {
         self.show_sidebar_left = false;
       }// end if the user is logged in, show the sidebar
 
-      self.show_item_spacing = no_item_spacing.indexOf(url) == -1;
-      self.show_sidebar_right = no_sidebar_right.indexOf(url) == -1;
+      self.displayHandler(url, no_item_spacing, 'show_item_spacing');  
+      self.displayHandler(url, no_sidebar_right, 'show_sidebar_right');
     });
   }// end ngOninit function
+
+  displayHandler(url, hiddenUrls, key) {
+    // handler for hiding certain components
+    for(let str of hiddenUrls) {
+      // for loop over all routes to hide
+      if(url !== '/' && str !== '/') {
+        this[key] = url.indexOf(str) == -1;
+        if(!this[key]) {
+          break;
+        }// end if
+      } else {
+        this[key] = false;  
+      }// end if we are not on home page
+
+    }// end for loop over no_sidebar_right
+
+  }// end function componentHandler
 
 }// end class AppComponent
