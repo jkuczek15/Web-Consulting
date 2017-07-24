@@ -51,7 +51,7 @@ export class LoginComponent implements OnInit, AfterViewChecked {
         this.authentication.storedURL = null;
       }else{
         // Set the authentication form error
-        this.formErrors['email'] = this.validationMessages[params.error];
+        this.formErrors['top'] = this.validationMessages[params.error];
         this.cd.detectChanges();
       }// end if we need to reset the storedURL      
     });
@@ -63,15 +63,8 @@ export class LoginComponent implements OnInit, AfterViewChecked {
 
     // Create our form and set any validation rules 
     this.loginForm = this.fb.group({
-      'email': [this.user.email, [
-          Validators.required,
-          Validators.pattern(patterns['email'])
-        ]
-      ],
-      'password': [this.user.password, [
-          Validators.required
-        ]
-      ]
+      'email': [this.user.email],
+      'password': [this.user.password]
     });
     
     // Subscribe and call this function if data in the form changes
@@ -88,9 +81,9 @@ export class LoginComponent implements OnInit, AfterViewChecked {
         // Navigate to the stored page or the index page depending on the request
         this.router.navigateByUrl(this.authentication.storedURL || '/profile');
     }, (err) => {
-      if(err.status === 401){
+      if(err.status === 401) {
         // User is unauthorized
-        this.formErrors['email'] = JSON.parse(err._body).message;
+        this.formErrors['top'] = JSON.parse(err._body).message;
       }else{
         console.log(err);  
       }// end if status is 401

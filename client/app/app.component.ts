@@ -32,8 +32,8 @@ export class AppComponent implements OnInit {
         self.show_sidebar_left = false;
       }// end if the user is logged in, show the sidebar
 
-      self.show_item_spacing = ['/'].indexOf(url) == -1;
-      self.show_sidebar_right = ['/', '/play'].indexOf(url) == -1;
+      self.show_item_spacing = ['/', '/login'].indexOf(url) == -1;
+      self.show_sidebar_right = ['/', '/play', '/login'].indexOf(url) == -1;
     });
   }// end ngOninit function
 
