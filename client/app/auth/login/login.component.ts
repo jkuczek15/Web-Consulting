@@ -50,7 +50,7 @@ export class LoginComponent implements OnInit, AfterViewChecked {
       // Subscribe to route parameter changes after the DOM is ready
       if(!params.error){
         this.authentication.storedURL = null;
-      }else{
+      }else if(!this.formErrors['top']){
         // Set the authentication form error
         this.formErrors['top'] = this.validationMessages[params.error];
         this.cd.detectChanges();
@@ -83,7 +83,7 @@ export class LoginComponent implements OnInit, AfterViewChecked {
         this.router.navigateByUrl(this.authentication.storedURL || '/profile');
     }, (err) => {
       if(err.status === 401) {
-        // User is unauthorized
+        // User is unauthorized, set the error message
         this.formErrors['top'] = JSON.parse(err._body).message;
       }else{
         console.log(err);  
