@@ -1,27 +1,28 @@
-<nav class="navbar navbar-default navbar-static-top">
+<nav class="navbar navbar-default navbar-static-top nav-main-wrapper">
   <div class="container-fluid">
-    <div class="navbar-header">
-      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>                        
-      </button>
-      <a class="navbar-brand" routerLink="/">Game</a>
-    </div>
-    <div class="collapse navbar-collapse" id="myNavbar">
-      <ul class="nav navbar-nav">
-        <li routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }"><a routerLink="/">Home</a></li>
-        <li routerLinkActive="active"><a routerLink="/forum">Forum</a></li>
-        <li *ngIf="loggedIn" routerLinkActive="active"><a routerLink="/play">Play</a></li>
-      </ul>
-      <ul *ngIf="!loggedIn" class="nav navbar-nav navbar-right">
-        <li routerLinkActive="active"><a routerLink="/login"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
-        <li routerLinkActive="active"><a routerLink="/register"><span class="glyphicon glyphicon-user"></span> Register</a></li>
-      </ul>
-      <ul *ngIf="loggedIn" class="nav navbar-nav navbar-right">
-        <li routerLinkActive="active"><a routerLink="/profile"><span class="glyphicon glyphicon-user"></span> Profile</a></li>
-        <li routerLinkActive="active"><a href="#" (click)="logout($event)"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
-      </ul>
-    </div>
+      <div class="navbar-header">
+          <a class="navbar-brand navbar-link" href="#">Game</a>
+          <button class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navcol-1">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+      </div>
+      <div class="collapse navbar-collapse" id="navcol-1">
+          <ul class="nav navbar-nav">
+              <li routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }"><a routerLink="/">Home</a></li>
+              <li routerLinkActive="active"><a routerLink="/forum">Forum</a></li>
+              <li *ngIf="loggedIn" routerLinkActive="active"><a routerLink="/play">Play</a></li>
+          </ul>
+          <ul *ngIf="!loggedIn" class="nav navbar-nav navbar-right">
+            <li routerLinkActive="active"><a routerLink="/login"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+            <li routerLinkActive="active"><a routerLink="/register"><span class="glyphicon glyphicon-user"></span> Register</a></li>
+          </ul>
+          <ul *ngIf="loggedIn" class="nav navbar-nav navbar-right">
+            <li routerLinkActive="active"><a routerLink="/profile"><span class="glyphicon glyphicon-user"></span> Profile</a></li>
+            <li routerLinkActive="active"><a href="#" (click)="logout($event)"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
+         </ul>
+      </div>
   </div>
 </nav>
