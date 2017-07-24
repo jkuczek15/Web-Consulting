@@ -2,10 +2,10 @@
    Global Style sheet, add any styles here that should be applied 
    accross multiple components.                                 
 */
-   
-/* Set height of the grid so .sidenav can be 100% (adjust as needed) */
+
+/* Set height of the grid so sidebar can be 100% (adjust as needed) */
 .row.content {
-    height: 589px; 
+    height: 639px; 
     overflow: hidden;
 }
 
