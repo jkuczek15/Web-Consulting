@@ -1,3 +1,9 @@
+/* Set height of the grid so sidebar can be 100% (adjust as needed) */
+.row.content {
+    height: 700px; 
+    overflow: hidden;
+}
+
 .navbar {
   margin-bottom:0;
   border:none;
