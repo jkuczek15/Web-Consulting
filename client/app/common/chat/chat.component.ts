@@ -1,5 +1,6 @@
 import { Component, OnInit, AfterViewChecked, ElementRef, ViewChild } from '@angular/core';
 import { ChatService } from './chat.service';
+import { AuthService } from '../../auth/auth.service';
 import * as io from "socket.io-client";
 
 @Component({
@@ -11,30 +12,38 @@ export class ChatComponent implements OnInit, AfterViewChecked {
 
   @ViewChild('scrollMe') private myScrollContainer: ElementRef;
 
-  chats: {};
+  chats: any;
   joinned: boolean = false;
   newUser = { nickname: '', room: '' };
   msgData = { room: '', nickname: '', message: '' };
   socket = io('http://localhost:4000');
 
-  constructor(private chatService: ChatService) {}
+  constructor(private chatService: ChatService,
+              private authentication: AuthService) {}
 
   ngOnInit() {
     var user = JSON.parse(localStorage.getItem("user"));
-    if(user!==null) {
+    this.chats = [];
+    
+    if(user) {
       this.getChatByRoom(user.room);
       this.msgData = { room: user.room, nickname: user.nickname, message: '' }
       this.joinned = true;
       this.scrollToBottom();
-    }
+    }// end if a user is already signed into chat
+    
+    if(this.authentication.loggedIn()) {
+       let authUser = this.authentication.currentUser();
+       this.newUser = { room: '', nickname: authUser.username };
+    }// end if we have a valid user in local storage
+
     this.socket.on('new-message', function (data) {
       var user = JSON.parse(localStorage.getItem("user"));
       if(user && data.message.room === user.room) {
-        console.log(data.message)
         this.chats.push(data.message);
         this.msgData = { room: user.room, nickname: user.nickname, message: '' }
         this.scrollToBottom();
-      }
+      }// end if we have a user and the rooms match
     }.bind(this));
   }// end function ngOnInit
 

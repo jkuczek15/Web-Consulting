@@ -32,15 +32,6 @@ select:invalid {
     color: lightslategray; 
 }
 
-/* Angular set custom green and red when filling out a form */
-input.ng-valid.form-control  {
-  border-left: 5px solid #42A948;  /* green */
-}
-
-input.ng-dirty.ng-invalid.form-control {
-  border-left: 5px solid #a94442;  /* red */
-}
-
 /* Make it so alerts don't change position of form inputs */
 .alert {
   position: absolute;

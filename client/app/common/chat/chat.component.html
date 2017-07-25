@@ -62,7 +62,7 @@
                   <h1>Select Chat Room</h1>
                   <form (ngSubmit)="joinRoom()" #joinForm="ngForm">
                     <div class="form-group">
-                      <input type="text" class="form-control" [(ngModel)]="newUser.nickname" name="nickname" placeholder="Nickname" required />
+                      <input type="text" class="form-control" [readonly]="true" [(ngModel)]="newUser.nickname" name="nickname" placeholder="Nickname" required />
                     </div>
                     <div class="form-group">
                       <select class="form-control" [(ngModel)]="newUser.room" name="room" required>
