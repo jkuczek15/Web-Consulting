@@ -10,6 +10,7 @@ export class HomeComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
-  }
+    
+  }// end ngOninit function
 
-}
+}// end class HomeComponent
