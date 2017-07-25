@@ -21,6 +21,14 @@
   flex-grow: 0.075; /* default 0 */
 }
 
+/* Flex the height and width of main content */
+.row.content-flex {
+   height: auto;
+   width: auto; 
+   overflow: hidden;
+}
+
+/* Apply right sidebar background */
 .sidenav {
   background-color: #f1f1f1;
 }
