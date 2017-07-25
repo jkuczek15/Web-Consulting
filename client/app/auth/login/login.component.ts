@@ -48,9 +48,9 @@ export class LoginComponent implements OnInit, AfterViewChecked {
   ngAfterViewChecked() {
     this.route.params.subscribe( params => {
       // Subscribe to route parameter changes after the DOM is ready
-      if(!params.error){
+      if(!params.error) {
         this.authentication.storedURL = null;
-      }else if(!this.formErrors['top']){
+      }else if(!this.formErrors['top']) {
         // Set the authentication form error
         this.formErrors['top'] = this.validationMessages[params.error];
         this.cd.detectChanges();
@@ -64,14 +64,16 @@ export class LoginComponent implements OnInit, AfterViewChecked {
 
     // Create our form and set any validation rules 
     this.loginForm = this.fb.group({
-      'email': [this.user.email],
+      'email': [this.user.email, [
+          Validators.pattern(patterns['email'])]
+        ],
       'password': [this.user.password]
     });
     
     // Subscribe and call this function if data in the form changes
-    this.loginForm.valueChanges.subscribe(data => this.shared.onValueChanged(this, 'loginForm', data));
+    this.loginForm.valueChanges.subscribe(data => this.shared.onValueChanged(this, 'loginForm', true, data));
     // Set validation messages now
-    this.shared.onValueChanged(this, 'loginForm'); 
+    this.shared.onValueChanged(this, 'loginForm', true); 
   }// end buildForm function
 
   login() {

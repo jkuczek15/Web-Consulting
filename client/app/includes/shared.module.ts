@@ -41,31 +41,36 @@ export class SharedModule {
     };
 
     // Shared 'onValueChanged' function for executing code each time form input changes
-    public onValueChanged(component, formKey, data?: any) {
+    public onValueChanged(component, formKey, top?, data?: any) {
       if (!component[formKey]) { return; }
       const form = component[formKey];
- 
-      for (const field in component.formErrors) {
+      
+      if(top) {
+         // reset the components top-level form error
+        component.formErrors['top'] = '';
+      }// end if we need to reset the components top form error
+     
+      for (let field in component.formErrors) {
         // Clear previous error message (if any)
-        component.formErrors[field] = '';
+        if(!top) {
+          component.formErrors[field] = '';
+        }// end if not displaying top errors
+        
+        // grab our form control object
         const control = form.get(field);
-  
+
         if (control && control.dirty && !control.valid) {
           const messages = this.validationMessages[field];
+          
+          // check if we should display errors on top of the form
+          if(top) {
+            field = 'top';
+          }// end if we need to set the top-level error
 
-          if(Object.keys(control.errors).length > 1){
-            // we have a list of errors, created an unordered list
-            component.formErrors[field] = '<ul>';
-            
-            for (const key in control.errors) {
-              component.formErrors[field] += '<li>' + messages[key] + '</li>';
-            }// end for loop over all the errors
-
-            component.formErrors[field] += '</ul>';
-          }else{
+          if(Object.keys(control.errors).length >= 1) {
             // there is only one error, dont make a list, just grab the 1st key
-            component.formErrors[field] += messages[Object.keys(control.errors)[0]];
-          }// end if we have more than one error
+            component.formErrors[field] = messages[Object.keys(control.errors)[0]];
+          }// end if we have at least one form error, display it
           
         }// end if the field has been modified and invalid
 

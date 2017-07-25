@@ -38,6 +38,7 @@ export class RegisterComponent implements OnInit {
     
     // Setup form errors and validation messages
     this.formErrors = JSON.parse(JSON.stringify(this.user));
+    this.formErrors.top = '';
     this.validationMessages = this.shared.validationMessages;
 
     // Create the form logic and enable the form
@@ -74,9 +75,9 @@ export class RegisterComponent implements OnInit {
     });
     
     // Subscribe and call this function if data in the form changes
-    this.registerForm.valueChanges.subscribe(data => this.shared.onValueChanged(this, 'registerForm', data));
+    this.registerForm.valueChanges.subscribe(data => this.shared.onValueChanged(this, 'registerForm', true, data));
     // Set validation messages now
-    this.shared.onValueChanged(this, 'registerForm');
+    this.shared.onValueChanged(this, 'registerForm', true);
   }// end buildForm function
 
   register() {
@@ -84,8 +85,8 @@ export class RegisterComponent implements OnInit {
     this.registerService.register(this.user).then((data: any) => {
       // User is created / authenticated
       this.authentication.saveToken(data.token);
-      // Navigate to the welcome page upon success
-      this.router.navigateByUrl('/');
+      // Navigate to the profile page upon success
+      this.router.navigateByUrl('/profile');
     }, (err) => {
       console.log(err);
     });
