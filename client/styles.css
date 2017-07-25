@@ -45,7 +45,8 @@ input.ng-dirty.ng-invalid.form-control {
 .alert {
   position: absolute;
   float: left;
-  margin: auto; display: table;
+  margin: auto; 
+  display: table;
 }
 
 /* ###### Bootstrap Tables ###### */
