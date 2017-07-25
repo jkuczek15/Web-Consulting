@@ -25,7 +25,7 @@ export class AppComponent implements OnInit {
     
     // List of URL's to determine if we are showing/hiding certain elements
     this.hiddenUrls = {
-      no_item_spacing: ['/', '/login'],
+      no_item_spacing: ['/', '/login', '/register'],
       no_sidebar_right: ['/', '/play', '/login', '/register'],
       no_sidebar_left: ['/']
     };

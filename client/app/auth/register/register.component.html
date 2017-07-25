@@ -1,63 +1,49 @@
-<h1>Register</h1>
-<br/>
-<form (ngSubmit)="register()" *ngIf="active" [formGroup]="registerForm" novalidate>
-  <div class="form-group row">
-    <div class="col-xs-4">
+<div class="register-dark row content">
+  <form (ngSubmit)="register()" *ngIf="active" [formGroup]="registerForm" novalidate>
+    <h2 class="sr-only">Register Form</h2>
+    <div class="form-group row centered">
+      <div *ngIf="formErrors.top" class="col-lg-10 col-lg-offset-10 alert alert-info" [innerHTML]="formErrors.top"></div>
+    </div>
+    <div class="form-group row">
+      <div class="illustration"><i class="icon ion-person"></i></div>
+    </div>
+    <div class="form-group row">
       <div class="group">      
-        <input [(ngModel)]="user.username" name="username" type="text" formControlName="username" required>
+        <input [(ngModel)]="user.username" name="username" type="text" class="form-control" formControlName="username" required>
         <span class="highlight"></span>
         <span class="bar"></span>
         <label>Display Name</label>
       </div>
     </div>
-    <div class="col-xs-1"></div>
-    <div class="col-xs-7">
-        <div *ngIf="formErrors.username" class="alert alert-danger" [innerHTML]="formErrors.username"></div>
-    </div>
-  </div>
-  <div class="form-group row">
-    <div class="col-xs-4">
+    <div class="form-group row">
       <div class="group">      
-        <input [(ngModel)]="user.email" name="email" type="text" formControlName="email" required>
+        <input [(ngModel)]="user.email" name="email" type="text" class="form-control" formControlName="email" required>
         <span class="highlight"></span>
         <span class="bar"></span>
         <label for="email">Email Address</label>
       </div>
     </div>
-    <div class="col-xs-1"></div>
-    <div class="col-xs-7">
-        <div *ngIf="formErrors.email" class="alert alert-danger" [innerHTML]="formErrors.email"></div>
-    </div>
-  </div>
-  <div class="form-group row">
-    <div class="col-xs-4">
+    <div class="form-group row">
       <div class="group">      
         <input validateEqual="confirm_password" [(ngModel)]="user.password" name="password" type="password" 
-               formControlName="password" reverse="true" required>
+                class="form-control" formControlName="password" reverse="true" required>
         <span class="highlight"></span>
         <span class="bar"></span>
-        <label for="password">Password:</label>
+        <label for="password">Password</label>
       </div>
     </div>
-    <div class="col-xs-1"></div>
-    <div class="col-xs-7">
-        <div *ngIf="formErrors.password" class="alert alert-danger" [innerHTML]="formErrors.password"></div>
-    </div>
-  </div>
-  <div class="form-group row">
-    <div class="col-xs-4">
+    <div class="form-group row">
       <div class="group">      
         <input validateEqual="password" [(ngModel)]="confirm_password" name="confirm_password" type="password" 
-               formControlName="confirm_password" required>
+                class="form-control" formControlName="confirm_password" required>
         <span class="highlight"></span>
         <span class="bar"></span>
-        <label for="confirm_password">Confirm Password:</label>
+        <label for="confirm_password">Confirm Password</label>
       </div>
     </div>
-    <div class="col-xs-1"></div>
-    <div class="col-xs-7">
-        <div *ngIf="formErrors.confirm_password" class="alert alert-danger" [innerHTML]="formErrors.confirm_password"></div>
+    <div class="form-group">
+      <button type="submit" class="btn btn-primary btn-block" [disabled]="registerForm.invalid">Register</button>
     </div>
-  </div>
-  <button type="submit" class="btn btn-success" [disabled]="registerForm.invalid">Sign Up</button>
-</form>
+    <a routerLink="/login" class="forgot">Already have an account?</a>
+  </form>
+</div>

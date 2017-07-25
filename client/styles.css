@@ -43,9 +43,9 @@ input.ng-dirty.ng-invalid.form-control {
 
 /* Make it so alerts don't change position of form inputs */
 .alert {
-  margin-top: 15px;
   position: absolute;
   float: left;
+  margin: auto; display: table;
 }
 
 /* ###### Bootstrap Tables ###### */
@@ -63,12 +63,12 @@ thead th {
 /* ###### Google Inputs ###### */
 .group {
   position:relative;
-  margin-bottom:45px;
+  margin-bottom:25px;
 }
 
 input {
-  font-size:18px;
-  padding:10px 10px 10px 5px;
+  font-size:14px;
+  padding:10px 10px;
   display:block;
   border:none;
   border-bottom:1px solid #757575;
@@ -80,7 +80,7 @@ input:focus {
 
 label {
   color:#999;
-  font-size:18px;
+  font-size:14px;
   font-weight:normal;
   position:absolute;
   pointer-events:none;
@@ -92,7 +92,7 @@ label {
 input:focus ~ label, input:valid ~ label {
   top:-20px;
   font-size:14px;
-  color:#5264AE;
+  color:#2980EF;
 }
 
 .bar {
@@ -107,7 +107,7 @@ input:focus ~ label, input:valid ~ label {
   width:0;
   bottom:1px;
   position:absolute;
-  background:#5264AE;
+  background: #2980EF;
   transition:0.2s ease all;
 }
 
