@@ -24,13 +24,13 @@
 /* Flex the height and width of main content */
 .row.content-flex {
    height: auto;
-   width: auto; 
    overflow: hidden;
 }
 
 /* Apply right sidebar background */
 .sidenav {
   background-color: #f1f1f1;
+  height: 640px; 
 }
 
 /* Flexbox item spacing */
