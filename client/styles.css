@@ -6,6 +6,7 @@
 /* Set height of the grid so sidebar can be 100% (adjust as needed) */
 .row.content {
     height: 640px; 
+    border-radius: 0 !important;
     overflow: hidden;
 }
 
@@ -13,8 +14,11 @@ body {
   padding-top: 50px; 
 }
 
-/* Remove Twitter Bootstrap rounded corners on all elements */
-
+/* Add pointer links to all hrefs */
+a {
+  cursor: pointer;
+  user-select: none;
+}
 
 /* On small screens, set height to 'auto' for sidenav and grid */
 @media screen and (max-width: 767px) {
@@ -175,3 +179,5 @@ input:focus ~ .highlight {
   animation:inputHighlighter 0.3s ease;
 }
 /* ###### [/ Google Inputs] ###### */
+
+@import url('assets/css/style.css');

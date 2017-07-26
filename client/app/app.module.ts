@@ -6,6 +6,9 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { SharedModule } from './includes/shared.module';
 
+// External Modules
+import { Ng2PageScrollModule } from 'ng2-page-scroll';
+
 // Services
 import { AuthService } from './auth/auth.service';
 import { LoginService } from './auth/login/login.service';
@@ -30,6 +33,8 @@ import { RegisterComponent } from './auth/register/register.component';
 import { ProfileComponent } from './auth/profile/profile.component';
 import { ForumComponent } from './forum/forum.component';
 import { PlayComponent } from './play/play.component';
+import { AboutComponent } from './about/about.component';
+import { ServicesComponent } from './services/services.component';
 
 // Initialize routes array with index / HomeComponent
 const appRoutes: Routes = [{
@@ -44,7 +49,9 @@ const routerComponents: any = [
     RegisterComponent,
     ForumComponent,
     PlayComponent,
-    ProfileComponent
+    ProfileComponent,
+    AboutComponent,
+    ServicesComponent
 ];
 
 // Begin adding application routes
@@ -100,7 +107,9 @@ appRoutes.push({
     PlayComponent,
     LoginComponent,
     RegisterComponent,
-    ProfileComponent
+    ProfileComponent,
+    AboutComponent,
+    ServicesComponent
   ],
   imports: [
     BrowserModule,
@@ -111,6 +120,7 @@ appRoutes.push({
       appRoutes,
       // { enableTracing: true } // <-- debugging purposes only
     ),
+    Ng2PageScrollModule.forRoot(),
     SharedModule
   ],
   providers: [

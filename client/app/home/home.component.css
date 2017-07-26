@@ -1,10 +1,15 @@
 .hero {
   background:url(../../assets/img/city_bg.jpg) no-repeat center;
-  background-size: cover;
+  background-size: auto;
   position:relative;
   border:none;
   padding: 0px;
   margin-bottom: 0;
+}
+
+/* Remove the rounded corners on all bootstrap items */
+* {
+  border-radius: 0 !important;
 }
 
 @media (min-width:992px) {

@@ -2,6 +2,7 @@ import { Component, OnInit, AfterViewInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { SharedModule } from './includes/shared.module';
 import { AuthService } from './auth/auth.service';
+import { PageScrollConfig } from 'ng2-page-scroll';
 
 @Component({
   selector: 'app-root',
@@ -18,7 +19,10 @@ export class AppComponent implements OnInit {
 
   constructor(private router: Router,
               private shared: SharedModule,
-              private authentication: AuthService) { }
+              private authentication: AuthService) 
+              {
+                PageScrollConfig.defaultDuration = 500; // scroll speed 1/2 a second
+              }// end appComponent constructor
 
   ngOnInit() {
     let self = this;
@@ -26,7 +30,7 @@ export class AppComponent implements OnInit {
     // List of URL's to determine if we are showing/hiding certain elements
     this.hiddenUrls = {
       no_item_spacing: ['/', '/login', '/register'],
-      no_sidebar_right: ['/', '/play', '/login', '/register'],
+      no_sidebar_right: ['/', '/play', '/login', '/register', '/about', '/services'],
       no_sidebar_left: ['/']
     };
 

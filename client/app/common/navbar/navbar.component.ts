@@ -30,4 +30,8 @@ export class NavbarComponent implements OnInit {
     return false;
   }// end logout function
 
+  postScroll(event){
+    console.log(event);
+  }// end if
+
 }// end class NavBarComponent
