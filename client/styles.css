@@ -180,4 +180,5 @@ input:focus ~ .highlight {
 }
 /* ###### [/ Google Inputs] ###### */
 
-@import url('assets/css/style.css');
+/* ###### Import custom theme ###### */
+@import url('assets/css/theme.css');

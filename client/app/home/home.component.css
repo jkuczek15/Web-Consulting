@@ -7,6 +7,16 @@
   margin-bottom: 0;
 }
 
+.btn-orange {
+  background-color: #F36F36;
+  border-color: #F36F36
+}
+
+.btn-orange:active {
+  background-color: #c1420b;
+  border-color: #c1420b
+}
+
 /* Remove the rounded corners on all bootstrap items */
 * {
   border-radius: 0 !important;

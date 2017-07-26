@@ -21,7 +21,8 @@ export class AppComponent implements OnInit {
               private shared: SharedModule,
               private authentication: AuthService) 
               {
-                PageScrollConfig.defaultDuration = 500; // scroll speed 1/2 a second
+                PageScrollConfig.defaultScrollOffset = 50;
+                PageScrollConfig.defaultDuration = 350; // anchor link scroll speed
               }// end appComponent constructor
 
   ngOnInit() {

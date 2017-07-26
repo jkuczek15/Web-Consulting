@@ -333,9 +333,9 @@ header .logo {
 	background: #43413e !important;
 }
 
-
 section.section {
-	padding: 100px 0 80px;
+	padding-top: 40px;
+	padding-bottom: 40px;
 }
 section.section h4 {
 	text-align: center;
