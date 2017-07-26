@@ -17,7 +17,6 @@ body {
 /* Add pointer links to all hrefs */
 a {
   cursor: pointer;
-  user-select: none;
 }
 
 /* On small screens, set height to 'auto' for sidenav and grid */

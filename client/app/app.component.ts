@@ -37,6 +37,9 @@ export class AppComponent implements OnInit {
 
     // Function to be called each time the route changes
     this.shared.onRouteChange(function() {
+      // scroll to the top of the page
+      window.scrollTo(0,0);
+      // grab the current URL
       let url = self.router.url;
 
       if(self.authentication.loggedIn()) {
