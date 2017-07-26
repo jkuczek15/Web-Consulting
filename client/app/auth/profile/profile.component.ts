@@ -18,7 +18,7 @@ export class ProfileComponent implements OnInit {
 
   ngOnInit() {
     // Require that the user be logged in
-    //this.authentication.requireLogin();
+    this.authentication.requireLogin();
     this.currentUser = new UserVM.Profile();
     
     // Grab our profile data using the service
