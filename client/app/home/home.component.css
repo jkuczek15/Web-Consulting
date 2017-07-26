@@ -1,24 +1,30 @@
-.hero {
-  background:url(../../assets/img/city_bg.jpg) no-repeat center;
-  background-size: auto;
-  position:relative;
-  border:none;
-  padding: 0px;
-  margin-bottom: 0;
+.headerText {
+  font-size: 72px;
+	text-transform: uppercase;
+	position: relative;
+	margin-bottom: 0px;
+	text-align: center;
+	line-height: 0.5;
+	color:#fff;
 }
 
 .btn-orange {
   background-color: #F36F36;
-  border-color: #F36F36
+  border-color: #F36F36;
+}
+
+.btn-orange:hover {
+  background-color: #f26326;
+  border-color: #f26326;
 }
 
 .btn-orange:active {
   background-color: #c1420b;
-  border-color: #c1420b
+  border-color: #c1420b;
 }
 
 /* Remove the rounded corners on all bootstrap items */
-* {
+.banner * {
   border-radius: 0 !important;
 }
 

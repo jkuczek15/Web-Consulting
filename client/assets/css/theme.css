@@ -233,11 +233,10 @@ h2.pagetitle {
 #header-wrapper {
 	width: 100%;
 	min-height: 600px;
-	margin-top: -60px;
+	margin-top: -60px;	
 	padding-top:160px;
-	text-align:center;
+	text-align: center;
 }
-
 
 #header-wrapper h1 {
 	color: #FFFFFF;
@@ -261,7 +260,7 @@ header .logo {
 
 /* --- Header slider --- */
 #header-wrapper.header-slider {
-	background: #444 url(../img/bg/bg-1.jpg) no-repeat center center fixed;
+	background: #444 url(../img/bg/bg-2.jpg) no-repeat center center fixed;
 	-webkit-background-size: cover;
 	-moz-background-size: cover;
 	-o-background-size: cover;
@@ -269,12 +268,12 @@ header .logo {
 }
 
 #main-flexslider ul.slides li p {
-	font-size: 72px;
+	font-size: 50px;
 	text-transform: uppercase;
 	position: relative;
 	margin-bottom: 0px;
 	text-align: center;
-	line-height: 1;
+	line-height: 1.5;
 	color:#fff;
 }
 #main-flexslider.flexslider {

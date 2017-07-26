@@ -33,8 +33,6 @@ import { RegisterComponent } from './auth/register/register.component';
 import { ProfileComponent } from './auth/profile/profile.component';
 import { ForumComponent } from './forum/forum.component';
 import { PlayComponent } from './play/play.component';
-import { AboutComponent } from './about/about.component';
-import { ServicesComponent } from './services/services.component';
 
 // Initialize routes array with index / HomeComponent
 const appRoutes: Routes = [{
@@ -49,9 +47,7 @@ const routerComponents: any = [
     RegisterComponent,
     ForumComponent,
     PlayComponent,
-    ProfileComponent,
-    AboutComponent,
-    ServicesComponent
+    ProfileComponent
 ];
 
 // Begin adding application routes
@@ -107,9 +103,7 @@ appRoutes.push({
     PlayComponent,
     LoginComponent,
     RegisterComponent,
-    ProfileComponent,
-    AboutComponent,
-    ServicesComponent
+    ProfileComponent
   ],
   imports: [
     BrowserModule,
