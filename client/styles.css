@@ -16,6 +16,7 @@ body {
 
 /* Add pointer links to all hrefs */
 a {
+  color: #2d719f;
   cursor: pointer;
 }
 

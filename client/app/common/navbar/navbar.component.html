@@ -11,7 +11,15 @@
       </div>
       <div class="collapse navbar-collapse" id="navcol-1">
           <ul class="nav navbar-nav">
-            <li routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }"><a routerLink="/">Home</a></li>
+            <li class="active" id="home-link">
+              <a pageScroll href="#header" (pageScrollFinish)="postScroll('home-link', $event)" routerLink="/">Home</a>
+            </li>
+            <li id="about-link">
+              <a pageScroll href="#about" (pageScrollFinish)="postScroll('about-link', $event)" routerLink="/">About</a>
+            </li>
+            <li id="services-link">
+              <a pageScroll href="#services" (pageScrollFinish)="postScroll('services-link', $event)" routerLink="/">Services</a>
+            </li>
             <li *ngIf="loggedIn" routerLinkActive="active"><a routerLink="/forum">Forum</a></li>
             <li *ngIf="loggedIn" routerLinkActive="active"><a routerLink="/play">Play</a></li>
           </ul>

@@ -21,7 +21,7 @@ export class AppComponent implements OnInit {
               private shared: SharedModule,
               private authentication: AuthService) 
               {
-                PageScrollConfig.defaultScrollOffset = 50;
+                PageScrollConfig.defaultScrollOffset = 40;
                 PageScrollConfig.defaultDuration = 350; // anchor link scroll speed
               }// end appComponent constructor
 
