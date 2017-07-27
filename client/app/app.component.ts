@@ -15,7 +15,7 @@ export class AppComponent implements OnInit {
   private show_sidebar_left: boolean = true;
   private show_sidebar_right: boolean = true;
   private show_item_spacing: boolean = false;
-  private hiddenUrls: any
+  private hiddenUrls: any;
 
   constructor(private router: Router,
               private shared: SharedModule,

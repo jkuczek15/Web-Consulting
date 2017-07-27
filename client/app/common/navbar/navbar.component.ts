@@ -26,9 +26,9 @@ export class NavbarComponent implements OnInit {
   
     // Function to be called each time the route changes
     this.shared.onRouteChange(function(data) {
+      self.loggedIn = self.authService.loggedIn();
       if(data.id !== 1) {
         // dont call this function when the route is initialized
-        self.loggedIn = self.authService.loggedIn();
         self.removeActive(self.activeNavID);
       }// end if the route was just initialized
     });

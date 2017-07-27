@@ -20,8 +20,6 @@
             <li id="services-link">
               <a pageScroll href="#services" (pageScrollFinish)="postScroll('services-link', $event)" routerLink="/">Services</a>
             </li>
-            <li *ngIf="loggedIn" routerLinkActive="active"><a routerLink="/forum">Forum</a></li>
-            <li *ngIf="loggedIn" routerLinkActive="active"><a routerLink="/play">Play</a></li>
           </ul>
           <ul *ngIf="!loggedIn" class="nav navbar-nav navbar-right">
             <li routerLinkActive="active"><a routerLink="/login"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>

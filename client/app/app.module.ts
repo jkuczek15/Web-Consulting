@@ -31,8 +31,6 @@ import { ChatComponent } from './common/chat/chat.component';
 import { LoginComponent } from './auth/login/login.component';
 import { RegisterComponent } from './auth/register/register.component';
 import { ProfileComponent } from './auth/profile/profile.component';
-import { ForumComponent } from './forum/forum.component';
-import { PlayComponent } from './play/play.component';
 
 // Initialize routes array with index / HomeComponent
 const appRoutes: Routes = [{
@@ -45,8 +43,6 @@ const appRoutes: Routes = [{
 const routerComponents: any = [
     LoginComponent,
     RegisterComponent,
-    ForumComponent,
-    PlayComponent,
     ProfileComponent
 ];
 
@@ -99,8 +95,6 @@ appRoutes.push({
     SidebarLeftComponent,
     SidebarRightComponent,
     HomeComponent,
-    ForumComponent,
-    PlayComponent,
     LoginComponent,
     RegisterComponent,
     ProfileComponent
