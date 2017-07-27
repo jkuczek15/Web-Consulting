@@ -14,8 +14,6 @@ export class NavbarComponent implements OnInit {
   // Initialize view model variables
   private loggedIn;
   private activeNavID;
-  private initialized;
-  private isClassVisible = true;
 
   constructor(private authService: AuthService,
               private shared: SharedModule) { }
