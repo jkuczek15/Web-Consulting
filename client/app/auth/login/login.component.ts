@@ -3,8 +3,8 @@ import { NgForm, Validators, FormBuilder, FormGroup } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
 import { LoginService } from './login.service';
 import { AuthService } from '../auth.service';
-import { SharedModule } from '../../includes/shared.module';
-import * as UserVM from '../../includes/viewModels/User.js';
+import { FormValidator } from '../../../includes/utils/form-validator.module';
+import * as UserVM from '../../../includes/viewModels/User.js';
 
 @Component({
   selector: 'app-login',
@@ -31,14 +31,14 @@ export class LoginComponent implements OnInit, AfterViewChecked {
               private cd: ChangeDetectorRef,
               private loginService: LoginService,
               private authentication: AuthService,
-              private shared: SharedModule) {this.error = route.params.map(p => p.error); }
+              private validator: FormValidator) {this.error = route.params.map(p => p.error); }
 
   ngOnInit() {
     this.authentication.redirectIfLoggedIn('/profile');
     // Create a new user VM from the User interface
     this.user = new UserVM.Login();
     this.formErrors = JSON.parse(JSON.stringify(this.user));
-    this.validationMessages = this.shared.validationMessages;
+    this.validationMessages = this.validator.validationMessages;
 
     // Create the form logic and enable the form
     this.buildForm();
@@ -60,7 +60,7 @@ export class LoginComponent implements OnInit, AfterViewChecked {
 
   buildForm(): void {
     // use Regex patterns for "simple" matching
-    let patterns = this.shared.patterns;
+    let patterns = this.validator.patterns;
 
     // Create our form and set any validation rules 
     this.loginForm = this.fb.group({
@@ -71,9 +71,9 @@ export class LoginComponent implements OnInit, AfterViewChecked {
     });
     
     // Subscribe and call this function if data in the form changes
-    this.loginForm.valueChanges.subscribe(data => this.shared.onValueChanged(this, 'loginForm', true, data));
+    this.loginForm.valueChanges.subscribe(data => this.validator.onValueChanged(this, 'loginForm', true, data));
     // Set validation messages now
-    this.shared.onValueChanged(this, 'loginForm', true); 
+    this.validator.onValueChanged(this, 'loginForm', true); 
   }// end buildForm function
 
   login() {

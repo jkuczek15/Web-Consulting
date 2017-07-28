@@ -1,16 +1,15 @@
 import { NgModule }     from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { EqualValidator } from './directives/equal-validator.directive';
-import { Router, NavigationEnd } from '@angular/router';
+import { EqualValidator } from '../directives/equal-validator.directive';
 
 @NgModule({
   imports:      [ CommonModule],
   declarations: [ EqualValidator],
   exports:      [ EqualValidator, CommonModule ]
 })
-export class SharedModule {
+export class FormValidator {
 
-    constructor(private router: Router) { }
+    constructor() { }
 
     // Shared validation messages among forms
     public validationMessages: any = {
@@ -78,12 +77,4 @@ export class SharedModule {
 
     }// end onValueChanged function
 
-    // Shared 'onRouteChange' function executing code each time route changes
-    public onRouteChange(funct) {
-      this.router.events.filter(event => (event instanceof NavigationEnd)).subscribe((routeData: any) => {
-        // Upon completition of route change, call our custom function
-        funct(routeData);
-      });
-    }// end shared module function for setting an 'onRouteChange' event
-
- }// end class SharedModule
+ }// end class FormValidator

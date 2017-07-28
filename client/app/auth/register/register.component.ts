@@ -3,8 +3,8 @@ import { NgForm, Validators, FormBuilder, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
 import { RegisterService } from './register.service';
 import { AuthService } from '../auth.service';
-import { SharedModule } from '../../includes/shared.module';
-import * as UserVM from '../../includes/viewModels/User.js';
+import { FormValidator } from '../../../includes/utils/form-validator.module';
+import * as UserVM from '../../../includes/viewModels/User.js';
 
 @Component({
   selector: 'app-register',
@@ -29,7 +29,7 @@ export class RegisterComponent implements OnInit {
               private authentication: AuthService,
               private fb: FormBuilder, 
               private router: Router,
-              private shared: SharedModule) { }
+              private validator: FormValidator) { }
 
   ngOnInit() {
     this.authentication.redirectIfLoggedIn('/profile');
@@ -39,7 +39,7 @@ export class RegisterComponent implements OnInit {
     // Setup form errors and validation messages
     this.formErrors = JSON.parse(JSON.stringify(this.user));
     this.formErrors.top = '';
-    this.validationMessages = this.shared.validationMessages;
+    this.validationMessages = this.validator.validationMessages;
 
     // Create the form logic and enable the form
     this.buildForm();
@@ -48,7 +48,7 @@ export class RegisterComponent implements OnInit {
 
   buildForm(): void {
     // use Regex patterns for "simple" matching
-    let patterns = this.shared.patterns;
+    let patterns = this.validator.patterns;
 
     // Create our form and set any validation rules 
     this.registerForm = this.fb.group({
@@ -75,9 +75,9 @@ export class RegisterComponent implements OnInit {
     });
     
     // Subscribe and call this function if data in the form changes
-    this.registerForm.valueChanges.subscribe(data => this.shared.onValueChanged(this, 'registerForm', true, data));
+    this.registerForm.valueChanges.subscribe(data => this.validator.onValueChanged(this, 'registerForm', true, data));
     // Set validation messages now
-    this.shared.onValueChanged(this, 'registerForm', true);
+    this.validator.onValueChanged(this, 'registerForm', true);
   }// end buildForm function
 
   register() {

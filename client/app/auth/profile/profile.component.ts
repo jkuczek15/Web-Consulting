@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../auth.service';
 import { ProfileService } from './profile.service';
-import * as UserVM from '../../includes/viewModels/User.js';
+import * as UserVM from '../../../includes/viewModels/User.js';
 import * as moment from 'moment';
 
 @Component({

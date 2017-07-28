@@ -4,9 +4,12 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { SharedModule } from './includes/shared.module';
 
-// External Modules
+// Custom Modules
+import { FormValidator } from '../includes/utils/form-validator.module';
+import { RouteHelper } from '../includes/utils/route-helper.module';
+
+// External Modules (NPM)
 import { Ng2PageScrollModule } from 'ng2-page-scroll';
 
 // Services
@@ -15,8 +18,8 @@ import { LoginService } from './auth/login/login.service';
 import { RegisterService } from './auth/register/register.service';
 import { ProfileService } from './auth/profile/profile.service';
 import { ChatService } from './common/chat/chat.service';
-import { HttpClient } from './includes/http-client.service'
-import { WindowService } from './includes/window.service'
+import { HttpClient } from '../includes/http-client.service'
+import { WindowService } from '../includes/window.service'
 
 // Main Application Components
 import { AppComponent } from './app.component';
@@ -112,7 +115,8 @@ appRoutes.push({
       // { enableTracing: true } // <-- debugging purposes only
     ),
     Ng2PageScrollModule.forRoot(),
-    SharedModule
+    FormValidator,
+    RouteHelper
   ],
   providers: [
     AuthService,

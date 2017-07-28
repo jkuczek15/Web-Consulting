@@ -1,6 +1,6 @@
 import { Component, OnInit, AfterViewInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { SharedModule } from './includes/shared.module';
+import { RouteHelper } from '../includes/utils/route-helper.module';
 import { AuthService } from './auth/auth.service';
 import { PageScrollConfig } from 'ng2-page-scroll';
 
@@ -18,7 +18,7 @@ export class AppComponent implements OnInit {
   private hiddenUrls: any;
 
   constructor(private router: Router,
-              private shared: SharedModule,
+              private routeControl: RouteHelper,
               private authentication: AuthService) 
               {
                 PageScrollConfig.defaultScrollOffset = 40;
@@ -36,7 +36,7 @@ export class AppComponent implements OnInit {
     };
 
     // Function to be called each time the route changes
-    this.shared.onRouteChange(function() {
+    this.routeControl.onRouteChange(function() {
       // scroll to the top of the page
       window.scrollTo(0,0);
       // grab the current URL
