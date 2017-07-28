@@ -82,7 +82,7 @@ export class LoginComponent implements OnInit, AfterViewChecked {
         // User is authenticated, store the token
         this.authentication.saveToken(data.token);
         // Navigate to the stored page or the index page depending on the request
-        this.router.navigateByUrl(this.authentication.storedURL || '/profile');
+        this.router.navigateByUrl(this.authentication.storedURL || '/dashboard');
     }, (err) => {
       if(err.status === 401) {
         // User is unauthorized, set the error message

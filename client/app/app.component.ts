@@ -31,8 +31,8 @@ export class AppComponent implements OnInit {
     // List of URL's to determine if we are showing/hiding certain elements
     this.hiddenUrls = {
       no_item_spacing: ['/', '/login', '/register'],
-      no_sidebar_right: ['/', '/play', '/login', '/register', '/about', '/services'],
-      no_sidebar_left: ['/']
+      no_sidebar_right: ['/', '/login', '/register'],
+      no_sidebar_left: []
     };
 
     // Function to be called each time the route changes
@@ -46,6 +46,7 @@ export class AppComponent implements OnInit {
         // user is logged in, determine when to show sidebars
         self.displayHandler(url, 'show_sidebar_left');
       } else {
+        // hide the left sidebar if the user is not logged in
         self.show_sidebar_left = false;
       }// end if the user is logged in, show the sidebar
 
@@ -57,7 +58,13 @@ export class AppComponent implements OnInit {
   displayHandler(url, key) {
     // handler for hiding certain components
     let hiddenUrls = this.hiddenUrls[key.replace('show', 'no')];
-   
+    
+    if(hiddenUrls.length === 0) {
+      // if we have a length of 0, we want to show this everywhere
+      this[key] = true;
+      return;
+    }// end if hiddenUrls.length == 0
+
     for(let str of hiddenUrls) {
       // for loop over all routes to hide
       if(url !== '/' && str !== '/') {

@@ -68,7 +68,7 @@ export class AuthService {
 
   redirectIfLoggedIn(url) {
     // Redirect a user to 'url' if they are logged in
-    if(this.loggedIn()){
+    if(this.loggedIn()) {
       this.router.navigateByUrl(url);
     }// end if the user is logged in
 

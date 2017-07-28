@@ -86,7 +86,7 @@ export class RegisterComponent implements OnInit {
       // User is created / authenticated
       this.authentication.saveToken(data.token);
       // Navigate to the profile page upon success
-      this.router.navigateByUrl('/profile');
+      this.router.navigateByUrl('/dashboard');
     }, (err) => {
       console.log(err);
     });

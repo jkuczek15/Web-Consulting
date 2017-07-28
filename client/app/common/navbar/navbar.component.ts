@@ -1,4 +1,4 @@
-import { Component, ViewChild, OnInit } from '@angular/core';
+import { Component, ViewChild, OnInit, AfterViewInit } from '@angular/core';
 import { AuthService } from '../../auth/auth.service';
 import { SharedModule } from '../../includes/shared.module';
 import 'rxjs/add/operator/filter';
@@ -9,13 +9,13 @@ declare var $: any;
   templateUrl: './navbar.component.html',
   styleUrls: ['./navbar.component.css']
 })
-export class NavbarComponent implements OnInit {
+export class NavbarComponent implements OnInit, AfterViewInit {
 
   // Initialize view model variables
   private loggedIn;
   private activeNavID;
 
-  constructor(private authService: AuthService,
+  constructor(private authentication: AuthService,
               private shared: SharedModule) { }
 
   ngOnInit() {
@@ -24,13 +24,17 @@ export class NavbarComponent implements OnInit {
   
     // Function to be called each time the route changes
     this.shared.onRouteChange(function(data) {
-      self.loggedIn = self.authService.loggedIn();
+      self.loggedIn = self.authentication.loggedIn();
       if(data.id !== 1) {
         // dont call this function when the route is initialized
         self.removeActive(self.activeNavID);
       }// end if the route was just initialized
     });
   }// end ngOnInit function
+
+  ngAfterViewInit(){
+    this.addActive(this.activeNavID);
+  }// end ngAfterViewInit function
 
   postScroll(id, reachedTarget) {
     // called each time user clicks link and scrolls to section
@@ -52,7 +56,7 @@ export class NavbarComponent implements OnInit {
 
   logout() {
     this.loggedIn = false;
-    this.authService.logout();
+    this.authentication.logout();
     return false;
   }// end logout function
 

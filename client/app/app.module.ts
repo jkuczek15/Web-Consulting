@@ -31,6 +31,7 @@ import { ChatComponent } from './common/chat/chat.component';
 import { LoginComponent } from './auth/login/login.component';
 import { RegisterComponent } from './auth/register/register.component';
 import { ProfileComponent } from './auth/profile/profile.component';
+import { DashboardComponent } from './dashboard/dashboard.component';
 
 // Initialize routes array with index / HomeComponent
 const appRoutes: Routes = [{
@@ -43,7 +44,8 @@ const appRoutes: Routes = [{
 const routerComponents: any = [
     LoginComponent,
     RegisterComponent,
-    ProfileComponent
+    ProfileComponent,
+    DashboardComponent
 ];
 
 // Begin adding application routes
@@ -72,7 +74,7 @@ routerComponents.forEach(function (comp) {
   let routePath = comp.name.replace('Component', '').toLowerCase();
   let optionalParams = [];
 
-  if(routePath == 'login') {
+  if(routePath === 'login') {
     optionalParams.push('error');
   }// end if routePath is login
 
@@ -97,7 +99,8 @@ appRoutes.push({
     HomeComponent,
     LoginComponent,
     RegisterComponent,
-    ProfileComponent
+    ProfileComponent,
+    DashboardComponent
   ],
   imports: [
     BrowserModule,

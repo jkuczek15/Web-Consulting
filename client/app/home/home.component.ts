@@ -1,4 +1,5 @@
 import { Component, OnInit, AfterViewInit } from '@angular/core';
+import { AuthService } from '../auth/auth.service';
 declare var $: any;
 
 @Component({
@@ -6,7 +7,7 @@ declare var $: any;
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.css']
 })
-export class HomeComponent implements OnInit {
+export class HomeComponent implements OnInit, AfterViewInit {
 
   constructor() { }
 
@@ -14,7 +15,7 @@ export class HomeComponent implements OnInit {
   }// end ngOninit function
 
   ngAfterViewInit() {
-
+    // DOM ready function
     function getViewportHeight() {
         var height = window.innerHeight; // Safari, Opera
         var mode = document.compatMode;
@@ -30,16 +31,14 @@ export class HomeComponent implements OnInit {
 
     $(window).scroll(function () {
         var vpH = getViewportHeight(),
-            scrolltop = (document.documentElement.scrollTop ?
-                document.documentElement.scrollTop :
-                document.body.scrollTop),
-            elems = [];
+        scrolltop = (document.documentElement.scrollTop ? document.documentElement.scrollTop : document.body.scrollTop),
+        elems = [];
         
         // naughty, but this is how it knows which elements to check for
         $.each($.cache, function () {
             if (this.events && this.events.inview) {
                 elems.push(this.handle.elem);
-            }
+            }// end if event is in view
         });
 
         if (elems.length) {
@@ -53,16 +52,17 @@ export class HomeComponent implements OnInit {
                     if (inview) {
                         $el.data('inview', false);
                         $el.trigger('inview', [ false ]);                        
-                    }
+                    }// end if inview
                 } else if (scrolltop < (top + height)) {
                     if (!inview) {
                         $el.data('inview', true);
                         $el.trigger('inview', [ true ]);
-                    }
-                }
+                    }// end if not inview
+                }// end if checking if the element is in view
             });
-        }
+        }// end if elems.length
     });
+    // call the scroll function now
     $(window).scroll();
 
     $('.scrollup').click(function(){
@@ -70,18 +70,17 @@ export class HomeComponent implements OnInit {
 		return false;
 	});
 	
-		$('.accordion').on('show', function (e) {
-		
-			$(e.target).prev('.accordion-heading').find('.accordion-toggle').addClass('active');
-			$(e.target).prev('.accordion-heading').find('.accordion-toggle i').removeClass('icon-plus');
-			$(e.target).prev('.accordion-heading').find('.accordion-toggle i').addClass('icon-minus');
-		});
-		
-		$('.accordion').on('hide', function (e) {
-			$(this).find('.accordion-toggle').not($(e.target)).removeClass('active');
-			$(this).find('.accordion-toggle i').not($(e.target)).removeClass('icon-minus');
-			$(this).find('.accordion-toggle i').not($(e.target)).addClass('icon-plus');
-		});	
+    $('.accordion').on('show', function (e) {
+        $(e.target).prev('.accordion-heading').find('.accordion-toggle').addClass('active');
+        $(e.target).prev('.accordion-heading').find('.accordion-toggle i').removeClass('icon-plus');
+        $(e.target).prev('.accordion-heading').find('.accordion-toggle i').addClass('icon-minus');
+    });
+    
+    $('.accordion').on('hide', function (e) {
+        $(this).find('.accordion-toggle').not($(e.target)).removeClass('active');
+        $(this).find('.accordion-toggle i').not($(e.target)).removeClass('icon-minus');
+        $(this).find('.accordion-toggle i').not($(e.target)).addClass('icon-plus');
+    });	
 
 	$('.navigation').onePageNav({
 		begin: function() {
@@ -90,7 +89,7 @@ export class HomeComponent implements OnInit {
 		end: function() {
 			console.log('stop');
 		},
-			scrollOffset: 0		
+        scrollOffset: 0		
 	});
 	
 	// prettyPhoto
@@ -99,12 +98,13 @@ export class HomeComponent implements OnInit {
     // Localscrolling 
 	$('#menu-main, .brand').localScroll();
 	
-	$('#menu-main li a').click(function(){
+	$('#menu-main li a').click(function() {
 		var links = $('#menu-main li a');
 		links.removeClass('selected');
 		$(this).addClass('selected');
 	});
 
+    // keep track of if we are on iOS or not
     var iOS = false,
     p = navigator.platform;
 
@@ -113,7 +113,7 @@ export class HomeComponent implements OnInit {
     }// end if iPad, iPhone, or iPod	
 	
     if (iOS === false) {
-
+        // Not on iOS
         $('.flyIn').bind('inview', function (event, visible) {
             if (visible === true) {
                 $(this).addClass('animated fadeInUp');
@@ -133,46 +133,47 @@ export class HomeComponent implements OnInit {
         });
     }// end if iOS === false
 	
-	  // add animation on hover
-		$(".service-box").hover(
-			function () {
-			$(this).find('img').addClass("animated pulse");
-			$(this).find('h2').addClass("animated fadeInUp");
-			},
-			function () {
-			$(this).find('img').removeClass("animated pulse");
-			$(this).find('h2').removeClass("animated fadeInUp");
-			}
-		);
+    // add animation on hover
+    $(".service-box").hover(
+        function () {
+            $(this).find('img').addClass("animated pulse");
+            $(this).find('h2').addClass("animated fadeInUp");
+        },
+        function () {
+            $(this).find('img').removeClass("animated pulse");
+            $(this).find('h2').removeClass("animated fadeInUp");
+        }
+    );
 	
     // cache container
     var $container = $('#portfolio-wrap');
     $.browser.safari = ($.browser.webkit && !(/chrome/.test(navigator.userAgent.toLowerCase())));	
     
-    if($.browser.safari){ 	
-    // initialize isotope
-    $container.isotope({
-      animationEngine : 'jquery',
-      animationOptions: {
-        duration: 200,
-        queue: false
-      },
-      layoutMode: 'fitRows'
-    });
+    if($.browser.safari) { 	
+         // initialize isotope
+        $container.isotope({
+        animationEngine : 'jquery',
+        animationOptions: {
+            duration: 200,
+            queue: false
+        },
+        layoutMode: 'fitRows'
+        });
     } else {	
-    $container.isotope({
-      animationEngine : 'best-available',
-      animationOptions: {
-        duration: 200,
-        queue: false
-      },
-      layoutMode: 'fitRows'
-    });	
-    
-    $(window).resize(function() {
-      $container.isotope('reLayout');
-    });
-    }
+        $container.isotope({
+            animationEngine : 'best-available',
+            animationOptions: {
+                duration: 200,
+                queue: false
+            },
+            layoutMode: 'fitRows'
+        });	
+        
+        $(window).resize(function() {
+            $container.isotope('reLayout');
+        });
+    }// end if we are in safari browser
+
     // filter items when filter link is clicked
     $('#filters a').click(function(){
       $('#filters a').removeClass('active');
