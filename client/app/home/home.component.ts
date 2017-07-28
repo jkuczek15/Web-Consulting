@@ -9,9 +9,10 @@ declare var $: any;
 })
 export class HomeComponent implements OnInit, AfterViewInit {
 
-  constructor() { }
+  constructor(private authentication: AuthService) { }
 
   ngOnInit() {
+    this.authentication.redirectIfLoggedIn('/dashboard');
   }// end ngOninit function
 
   ngAfterViewInit() {

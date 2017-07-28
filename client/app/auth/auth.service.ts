@@ -70,6 +70,8 @@ export class AuthService {
     // Redirect a user to 'url' if they are logged in
     if(this.loggedIn()) {
       this.router.navigateByUrl(url);
+      // scroll to the top of the page
+      this.window.scrollTo(0,0);
     }// end if the user is logged in
 
   }// end function to redirect the user if they are logged in
