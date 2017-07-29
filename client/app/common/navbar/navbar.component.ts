@@ -12,7 +12,7 @@ declare var $: any;
 export class NavbarComponent implements OnInit, AfterViewInit {
 
   // Initialize view model variables
-  private loggedIn;
+  public loggedIn;
   private activeNavID;
 
   constructor(private authentication: AuthService,

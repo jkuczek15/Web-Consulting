@@ -18,11 +18,10 @@ export class RegisterComponent implements OnInit {
   
   // Initialize form scope variables
   public formErrors;
-  public validationMessages;
   public registerForm: FormGroup;
-  private user;
-  private confirm_password;
-  private active;
+  public user;
+  public confirm_password;
+  public active;
   
   // Inject services into our constructor
   constructor(private registerService: RegisterService, 
@@ -39,7 +38,6 @@ export class RegisterComponent implements OnInit {
     // Setup form errors and validation messages
     this.formErrors = JSON.parse(JSON.stringify(this.user));
     this.formErrors.top = '';
-    this.validationMessages = this.validator.validationMessages;
 
     // Create the form logic and enable the form
     this.buildForm();

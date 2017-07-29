@@ -4,7 +4,7 @@ This project was generated with [Angular CLI](https://github.com/angular/angular
 
 ## Development server
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+Run `ng serve` to serve the live development server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
 
 We can use the development server for testing any live `CSS/HTML` changes. Only do a full build when testing the `API` and `mongoDB` connections.
 
@@ -18,7 +18,12 @@ Run `ng generate component component-name` to generate a new component. You can 
 
 Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `-prod` flag for a production build.
 
-## Test Website + API
+## Production and Development Environments
+
+The `-prod` flag can be added to both the `ng build` and `ng serve` commands. In components, this will set the global variable `environment.production` to true. Note that in production, Angular minifys JS and CSS files so the project runs a lot smoother.
+
+## Full Testing
+We can test both the API and our development changes by doing the following: 
 
 1. Navigate to project folder, run `npm install` to install any missing dependencies.
 2. Make sure you have [mongoDB](https://www.mongodb.com/download-center#community) installed and it is running on port 27017.
@@ -30,6 +35,11 @@ Run `ng build` to build the project. The build artifacts will be stored in the `
 
 Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
 Before running the tests make sure you are serving the app via `ng serve`.
+
+## Shorthand Angular Commands
+- `ng build` -- `ng b`
+- `ng serve` -- `ng s`
+- `ng generate component` -- `ng g c`
 
 ## Further help
 

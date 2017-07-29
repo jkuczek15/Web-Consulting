@@ -12,9 +12,9 @@ import { PageScrollConfig } from 'ng2-page-scroll';
 export class AppComponent implements OnInit {
   
   // Boolean variables to keep track if we are displaying certain elements
-  private show_sidebar_left: boolean = true;
-  private show_sidebar_right: boolean = true;
-  private show_item_spacing: boolean = false;
+  public show_sidebar_left: boolean = true;
+  public show_sidebar_right: boolean = true;
+  public show_item_spacing: boolean = false;
   private hiddenUrls: any;
 
   constructor(private router: Router,
@@ -31,7 +31,7 @@ export class AppComponent implements OnInit {
     // List of URL's to determine if we are showing/hiding certain elements
     this.hiddenUrls = {
       no_item_spacing: ['/', '/login', '/register'],
-      no_sidebar_right: ['/', '/login', '/register'],
+      no_sidebar_right: ['/', '/login', '/register', '/dashboard'],
       no_sidebar_left: []
     };
 
