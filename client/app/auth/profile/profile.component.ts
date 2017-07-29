@@ -12,7 +12,7 @@ import * as moment from 'moment';
 export class ProfileComponent implements OnInit {
 
   // Initialize view model variables
-  private currentUser;
+  public currentUser;
   constructor(private authentication: AuthService,
               private profileService: ProfileService) { }
 

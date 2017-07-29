@@ -2,6 +2,7 @@ import { Component, OnInit, ViewChild, AfterViewChecked, ChangeDetectorRef } fro
 import { NgForm, Validators, FormBuilder, FormGroup } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
 import { LoginService } from './login.service';
+import { environment } from '../../../environments/environment';
 import { AuthService } from '../auth.service';
 import { FormValidator } from '../../../includes/utils/form-validator.module';
 import * as UserVM from '../../../includes/viewModels/User.js';
@@ -18,11 +19,10 @@ export class LoginComponent implements OnInit, AfterViewChecked {
   
   // Initialize form scope variables
   public formErrors;
-  public validationMessages;
   public loginForm: FormGroup;
-  private user;
-  private active;
-  private error;
+  public active;
+  public user;
+  //private error;
   
   // Inject services into our constructor
   constructor(private fb: FormBuilder, 
@@ -31,14 +31,13 @@ export class LoginComponent implements OnInit, AfterViewChecked {
               private cd: ChangeDetectorRef,
               private loginService: LoginService,
               private authentication: AuthService,
-              private validator: FormValidator) {this.error = route.params.map(p => p.error); }
+              private validator: FormValidator) {  }
 
   ngOnInit() {
     this.authentication.redirectIfLoggedIn('/profile');
     // Create a new user VM from the User interface
     this.user = new UserVM.Login();
     this.formErrors = JSON.parse(JSON.stringify(this.user));
-    this.validationMessages = this.validator.validationMessages;
 
     // Create the form logic and enable the form
     this.buildForm();
@@ -52,7 +51,7 @@ export class LoginComponent implements OnInit, AfterViewChecked {
         this.authentication.storedURL = null;
       }else if(!this.formErrors['top']) {
         // Set the authentication form error
-        this.formErrors['top'] = this.validationMessages[params.error];
+        this.formErrors['top'] = this.validator.validationMessages[params.error];
         this.cd.detectChanges();
       }// end if we need to reset the storedURL      
     });
@@ -77,6 +76,13 @@ export class LoginComponent implements OnInit, AfterViewChecked {
   }// end buildForm function
 
   login() {
+    if(!environment.production) {
+      // we are not in production
+      this.authentication.debugLogout = false;
+      // Navigate to the stored page or the index page depending on the request
+      this.router.navigateByUrl(this.authentication.storedURL || '/dashboard');
+    }// end if we are not in production environment
+
     // We have passed all client-side validation, save the user
     this.loginService.login(this.user).then((data: any) => {
         // User is authenticated, store the token

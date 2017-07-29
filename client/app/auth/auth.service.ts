@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { Http, Headers } from '@angular/http';
 import { WindowService } from '../../includes/window.service';
 import { Router } from '@angular/router';
+import { environment } from '../../environments/environment';
 import 'rxjs/add/operator/map';
 
 @Injectable()
@@ -9,6 +10,7 @@ export class AuthService {
   // Use the client window sessionStorage for local storage
   public window;
   public storedURL;
+  public debugLogout: boolean = false;
   constructor(private http: Http,
               private winRef: WindowService,
               private router: Router) { this.window = winRef.nativeWindow; }
@@ -22,6 +24,12 @@ export class AuthService {
   }// end function getToken
 
   loggedIn() {
+    // determine if the current user is logged in
+    if(!environment.production && !this.debugLogout) {
+      return true;
+    }// end if we are not in production environment
+
+    // grab the session token
     let token = this.getToken();
     let payload;
 
@@ -38,7 +46,12 @@ export class AuthService {
 
   currentUser() {
     // Return data about the currently logged in user
-    if(this.loggedIn()){
+    if(!environment.production) {
+      // return a fake user if we are in development
+      return environment.user;
+    }// end if we are not in production environment
+
+    if(this.loggedIn()) {
       var token = this.getToken();
       var payload = token.split('.')[1];
       payload = window.atob(payload);
@@ -52,6 +65,11 @@ export class AuthService {
   }// end function currentUser
 
   logout(){
+    // log the user out by removing them from session
+    if(!environment.production){
+      this.debugLogout = true;
+    }// end if we are not in production environment
+
     window.sessionStorage.removeItem('auth_token');
     this.router.navigateByUrl('/login');
   }// end function logout

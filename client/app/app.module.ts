@@ -36,53 +36,33 @@ import { RegisterComponent } from './auth/register/register.component';
 import { ProfileComponent } from './auth/profile/profile.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 
-// Initialize routes array with index / HomeComponent
-const appRoutes: Routes = [{
+// Initalize all our routes to point to specific components
+const appRoutes: Routes = [
+  {
     path: '',
-    component: HomeComponent,
-}];
-
-// Add components to this array if you want the client
-// to be able to route to the page using a URL
-const routerComponents: any = [
-    LoginComponent,
-    RegisterComponent,
-    ProfileComponent,
-    DashboardComponent
+    component: HomeComponent
+  },
+  {
+     path: 'login',
+     component: LoginComponent
+  },
+  {
+    path: 'login/:error',
+    component: LoginComponent
+  },
+  {
+     path: 'register',
+     component: RegisterComponent
+  },
+  {
+     path: 'profile',
+     component: ProfileComponent
+  },
+  {
+     path: 'dashboard',
+     component: DashboardComponent
+  }
 ];
-
-// Begin adding application routes
-let addAppRoute = function(routePath, component, optionalParams) {
-  // Function for adding a new app route to the Angular Router
-  if(optionalParams.length > 0) {
-    // We have optional parameters to add to the route    
-    optionalParams.forEach(function (param) {
-      appRoutes.push({
-        path: routePath + '/:' + param,
-        component: component
-      });
-    });// end for loop over optional parameters
-
-  }// end if we have optional parameters
-
-  // Add our default route to the array
-  appRoutes.push({
-      path: routePath,
-      component: component
-  });
-};
-
-// Do not use the word 'Component' in any custom-components
-routerComponents.forEach(function (comp) {
-  let routePath = comp.name.replace('Component', '').toLowerCase();
-  let optionalParams = [];
-
-  if(routePath === 'login') {
-    optionalParams.push('error');
-  }// end if routePath is login
-
-  addAppRoute(routePath, comp, optionalParams);
-});
 
 // Take invalid routes and redirect users to index
 appRoutes.push({
@@ -111,7 +91,7 @@ appRoutes.push({
     ReactiveFormsModule,
     HttpModule,
     RouterModule.forRoot(
-      appRoutes,
+      appRoutes
       // { enableTracing: true } // <-- debugging purposes only
     ),
     Ng2PageScrollModule.forRoot(),
