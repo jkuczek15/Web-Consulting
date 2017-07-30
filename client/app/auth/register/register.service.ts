@@ -1,11 +1,10 @@
 import { Injectable } from '@angular/core';
-import { Http, Headers } from '@angular/http';
-import 'rxjs/add/operator/map';
+import { HttpClient } from '../../../includes/http-client.service';
 
 @Injectable()
 export class RegisterService {
 
-  constructor(private http: Http) { }
+  constructor(private http: HttpClient) { }
 
   register(data) {
     return new Promise((resolve, reject) => {
