@@ -4,6 +4,7 @@ import { getScienceData } from './data';
 import { updateHeatmap } from './science-demo.service';
 import { point } from './science-demo.service';
 import { generateHeatmapData } from './science-demo.service';
+declare var chroma: any;
 
 let heatmapScale = chroma.scale(['#17F556', '#ED6D47']);
 let heatmap = [];

@@ -13,6 +13,10 @@
     "typeRoots": [
       "node_modules/@types"
     ],
+    "types" : [
+      "node",
+      "core-js"
+    ],
     "lib": [
       "es2016",
       "dom"

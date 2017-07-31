@@ -9,8 +9,8 @@ import 'amcharts3/amcharts/serial.js';
 import 'ammap3';
 import 'ammap3/ammap/maps/js/worldLow';
 
-
 import {BaAmChartThemeService} from './baAmChartTheme.service';
+declare var AmCharts: any;
 
 @Component({
   selector: 'ba-am-chart',

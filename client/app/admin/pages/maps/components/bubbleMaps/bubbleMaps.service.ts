@@ -1,5 +1,6 @@
 import {Injectable} from '@angular/core';
 import {BaThemeConfigProvider, layoutPaths} from '../../../../theme';
+declare var AmCharts: any;
 
 @Injectable()
 export class BubbleMapsService {

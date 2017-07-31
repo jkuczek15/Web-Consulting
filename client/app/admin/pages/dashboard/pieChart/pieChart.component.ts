@@ -30,7 +30,7 @@ export class PieChart {
   private _loadPieCharts() {
 
     jQuery('.chart').each(function () {
-      let chart = jQuery(this);
+      let chart = (<any> jQuery(this));
       chart.easyPieChart({
         easing: 'easeOutBounce',
         onStep: function (from, to, percent) {

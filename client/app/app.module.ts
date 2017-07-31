@@ -4,10 +4,12 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { NgUploaderModule } from 'ngx-uploader';
 
 // Custom Modules
 import { FormValidator } from '../includes/utils/form-validator.module';
 import { RouteHelper } from '../includes/utils/route-helper.module';
+import { AdminModule } from './admin/app.module';
 
 // External Modules (NPM)
 import { Ng2PageScrollModule } from 'ng2-page-scroll';
@@ -35,6 +37,7 @@ import { LoginComponent } from './auth/login/login.component';
 import { RegisterComponent } from './auth/register/register.component';
 import { ProfileComponent } from './auth/profile/profile.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
+import { App } from './admin/app.component'
 
 // Initalize all our routes to point to specific components
 const appRoutes: Routes = [
@@ -61,6 +64,10 @@ const appRoutes: Routes = [
   {
      path: 'dashboard',
      component: DashboardComponent
+  },
+  {
+    path: 'admin',
+    component: App
   }
 ];
 
@@ -90,13 +97,15 @@ appRoutes.push({
     FormsModule,
     ReactiveFormsModule,
     HttpModule,
+    NgUploaderModule,
     RouterModule.forRoot(
       appRoutes
       // { enableTracing: true } // <-- debugging purposes only
     ),
     Ng2PageScrollModule.forRoot(),
     FormValidator,
-    RouteHelper
+    RouteHelper,
+    AdminModule
   ],
   providers: [
     AuthService,

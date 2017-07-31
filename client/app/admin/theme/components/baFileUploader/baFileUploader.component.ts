@@ -6,7 +6,7 @@ import { NgUploaderOptions } from 'ngx-uploader';
   templateUrl: './baFileUploader.html',
 })
 export class BaFileUploader {
-  @Input() fileUploaderOptions: NgUploaderOptions = { url: '' };
+  @Input() fileUploaderOptions: any = { url: '' };
   @Output() onFileUpload = new EventEmitter<any>();
   @Output() onFileUploadCompleted = new EventEmitter<any>();
   @Input() defaultValue: string = '';
