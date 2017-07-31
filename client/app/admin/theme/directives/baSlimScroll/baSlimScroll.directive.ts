@@ -1,6 +1,6 @@
 import {Directive, Input, Output, ElementRef, EventEmitter} from '@angular/core';
 
-import 'jquery-slimscroll';
+import '../../../../../assets/js/jquery.slimscroll';
 
 @Directive({
   selector: '[baSlimScroll]'

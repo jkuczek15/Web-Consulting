@@ -1,5 +1,5 @@
 import {Component, ViewChild, Input, Output, ElementRef, EventEmitter} from '@angular/core';
-import 'fullcalendar/dist/fullcalendar.js';
+import '../../../../../assets/js/fullcalendar.min';
 import * as jQuery from 'jquery';
 
 @Component({
