@@ -2,7 +2,7 @@ import {Component} from '@angular/core';
 
 import {PieChartService} from './pieChart.service';
 
-import 'easy-pie-chart/dist/jquery.easypiechart.js';
+import '../../../../../assets/js/jquery.easypiechart.js';
 
 @Component({
   selector: 'pie-chart',

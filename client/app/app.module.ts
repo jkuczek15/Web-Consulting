@@ -5,6 +5,7 @@ import { HttpModule } from '@angular/http';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { NgUploaderModule } from 'ngx-uploader';
+import { NgUploaderOptions } from 'ngx-uploader';
 
 // Custom Modules
 import { FormValidator } from '../includes/utils/form-validator.module';
@@ -116,6 +117,7 @@ appRoutes.push({
     RegisterService,
     WindowService
   ],
-  bootstrap: [AppComponent]
+  exports: [NgUploaderModule],
+  bootstrap: [AppComponent, HttpClient]
 })
 export class AppModule { }
